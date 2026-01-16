@@ -48,44 +48,60 @@
   --font-sans: 'Cairo', 'Syne', sans-serif;
   --font-display: 'Syne', sans-serif;
   
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 :root {
   /* Dark Tech Theme */
-  --background: 240 10% 4%; /* Very dark navy/black */
+  --background: 240 10% 4%;
   --foreground: 0 0% 98%;
-
   --card: 240 10% 6%;
   --card-foreground: 0 0% 98%;
-
   --popover: 240 10% 6%;
   --popover-foreground: 0 0% 98%;
-
-  --primary: 270 70% 60%; /* Neon Purple */
+  --primary: 270 70% 60%;
   --primary-foreground: 0 0% 100%;
-
-  --secondary: 240 10% 12%; /* Dark grey/blue for secondary elements */
+  --secondary: 240 10% 12%;
   --secondary-foreground: 0 0% 98%;
-
   --muted: 240 10% 12%;
   --muted-foreground: 240 5% 65%;
-
-  --accent: 320 80% 60%; /* Hot Pink accent */
+  --accent: 320 80% 60%;
   --accent-foreground: 0 0% 100%;
-
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
-
-  --border: 240 10% 12%;
-  --input: 240 10% 12%;
+  --border: 240 10% 15%;
+  --input: 240 10% 15%;
   --ring: 270 70% 60%;
+}
 
-  --chart-1: 270 70% 60%;
-  --chart-2: 320 80% 60%;
-  --chart-3: 190 80% 60%;
-  --chart-4: 280 65% 60%;
-  --chart-5: 340 75% 55%;
+.dark {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 6%;
+  --border: 240 10% 15%;
+}
+
+:root:not(.dark) {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 4%;
+  --card: 240 5% 98%;
+  --card-foreground: 240 10% 4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 4%;
+  --primary: 270 70% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 5% 95%;
+  --secondary-foreground: 240 10% 4%;
+  --muted: 240 5% 95%;
+  --muted-foreground: 240 5% 40%;
+  --accent: 320 80% 50%;
+  --accent-foreground: 0 0% 100%;
+  --border: 240 5% 90%;
+  --input: 240 5% 90%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer base {
@@ -93,7 +109,7 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20 selection:text-primary;
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20 selection:text-primary transition-colors duration-300;
   }
 }
 
