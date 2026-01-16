@@ -2,11 +2,12 @@ import { Link } from "wouter";
 import { Menu, X, Code2, Moon, Sun, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
-  const [lang, setLang] = useState("ar");
+  const { lang, setLang, t } = useLanguage();
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -16,34 +17,29 @@ export function Navbar() {
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   const toggleLang = () => setLang(lang === "ar" ? "en" : "ar");
 
-  const links = lang === "ar" ? [
-    { name: "الرئيسية", href: "#hero" },
-    { name: "خدماتي", href: "#services" },
-    { name: "أعمالي", href: "#portfolio" },
-    { name: "تواصل معي", href: "#contact" },
-  ] : [
-    { name: "Home", href: "#hero" },
-    { name: "Services", href: "#services" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Contact", href: "#contact" },
+  const links = [
+    { name: t("nav.home"), href: "#hero" },
+    { name: t("nav.services"), href: "#services" },
+    { name: t("nav.portfolio"), href: "#portfolio" },
+    { name: t("nav.contact"), href: "#contact" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between" dir={lang === "ar" ? "rtl" : "ltr"}>
+      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group cursor-pointer">
           <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
             <Code2 className="w-6 h-6 text-primary" />
           </div>
           <span className="font-display font-bold text-xl tracking-tight">
-            {lang === "ar" ? <>مطور<span className="text-primary">ويب</span></> : <>Web<span className="text-primary">Dev</span></>}
+            {t("logo.dev")}<span className="text-primary">{t("logo.web")}</span>
           </span>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-6 ml-4 mr-4">
+          <div className="flex items-center gap-6">
             {links.map((link) => (
               <a
                 key={link.name}
@@ -60,7 +56,7 @@ export function Navbar() {
             ))}
           </div>
           
-          <div className="flex items-center gap-2 border-l border-border/50 pl-4">
+          <div className="flex items-center gap-2 border-l border-border/50 pl-4 rtl:border-l-0 rtl:border-r rtl:pr-4">
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
               {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
@@ -68,8 +64,8 @@ export function Navbar() {
               <Globe className="w-4 h-4" />
               {lang === "ar" ? "EN" : "AR"}
             </Button>
-            <Button className="rounded-full font-bold ml-2">
-              {lang === "ar" ? "ابدأ مشروعك" : "Start Project"}
+            <Button className="rounded-full font-bold">
+              {t("nav.start")}
             </Button>
           </div>
         </div>
@@ -110,7 +106,7 @@ export function Navbar() {
             {lang === "ar" ? "English" : "العربية"}
           </Button>
           <Button className="w-full rounded-full font-bold">
-            {lang === "ar" ? "ابدأ مشروعك" : "Start Project"}
+            {t("nav.start")}
           </Button>
         </div>
       )}

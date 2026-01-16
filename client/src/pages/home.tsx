@@ -17,23 +17,10 @@ import {
 } from "lucide-react";
 import heroBg from "@assets/generated_images/abstract_dark_tech_background_with_neon_gradients.png";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Home() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-  };
+  const { lang, t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
@@ -66,16 +53,16 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              <span className="text-sm font-medium">متاح للعمل الحر | Available for Freelance</span>
+              <span className="text-sm font-medium">{t("hero.badge")}</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-6 leading-tight">
-              نحول أفكارك إلى <br />
-              <span className="text-gradient">واقع رقمي مذهل</span>
+              {t("hero.title1")} <br />
+              <span className="text-gradient">{t("hero.title2")}</span>
             </h1>
 
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              بناء واجهات عصرية، سريعة، وجذابة. نساعدك في الظهور بأفضل شكل على الإنترنت من خلال تصاميم فريدة وأداء استثنائي.
+              {t("hero.desc")}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -84,8 +71,8 @@ export default function Home() {
                 className="rounded-full text-lg h-14 px-8 w-full sm:w-auto glow"
                 onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                تصفح خدماتي
-                <ArrowLeft className="mr-2 h-5 w-5 rtl:rotate-0 ltr:rotate-180" />
+                {t("hero.cta1")}
+                <ArrowLeft className={`mr-2 h-5 w-5 transition-transform ${lang === 'en' ? 'rotate-180' : 'rotate-0'}`} />
               </Button>
               <Button 
                 size="lg" 
@@ -93,7 +80,7 @@ export default function Home() {
                 className="rounded-full text-lg h-14 px-8 w-full sm:w-auto bg-background/50 backdrop-blur-xs border-white/10 hover:bg-white/5"
                 onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                تواصل معي
+                {t("hero.cta2")}
               </Button>
             </div>
           </motion.div>
@@ -109,27 +96,27 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">خدماتي المميزة</h2>
+            <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">{t("services.title")}</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              أقدم مجموعة متكاملة من الخدمات الرقمية لمساعدتك في الظهور بأفضل شكل على الإنترنت.
+              {t("services.desc")}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
             <ServiceCard 
               icon={Laptop}
-              title="تصميم وتطوير المواقع"
-              description="مواقع عصرية متجاوبة مع جميع الشاشات، سريعة التحميل، ومصممة بأحدث التقنيات لتعكس هويتك أو علامتك التجارية."
+              title={t("services.web.title")}
+              description={t("services.web.desc")}
             />
             <ServiceCard 
               icon={Briefcase}
-              title="معرض الأعمال (Portfolio)"
-              description="مساحة خاصة لاستعراض مشاريعك وإنجازاتك بطريقة احترافية تجذب العملاء وأصحاب العمل."
+              title={t("services.portfolio.title")}
+              description={t("services.portfolio.desc")}
             />
             <ServiceCard 
               icon={FileText}
-              title="سيرة ذاتية تفاعلية (CV)"
-              description="سيرة ذاتية رقمية تفاعلية تميزك عن الآخرين وتبرز مهاراتك بشكل عصري وجذاب."
+              title={t("services.cv.title")}
+              description={t("services.cv.desc")}
             />
           </div>
         </div>
@@ -140,23 +127,23 @@ export default function Home() {
         <div className="container px-6 mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: lang === 'ar' ? 50 : -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">لماذا تختارني؟</h2>
+              <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">{t("why.title")}</h2>
               <div className="space-y-6">
                 {[
-                  "تصاميم عصرية وجذابة تلفت الانتباه",
-                  "أكواد نظيفة وسريعة الأداء",
-                  "توافق كامل مع جميع الأجهزة (Mobile Responsive)",
-                  "تسليم في الموعد المحدد",
-                  "دعم فني وتعديلات مرنة"
+                  t("why.item1"),
+                  t("why.item2"),
+                  t("why.item3"),
+                  t("why.item4"),
+                  t("why.item5")
                 ].map((item, index) => (
                   <motion.div 
                     key={index} 
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: lang === 'ar' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
@@ -179,7 +166,7 @@ export default function Home() {
                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                <div className="relative text-center p-8 border border-border bg-background/50 backdrop-blur-md rounded-xl max-w-xs transform group-hover:scale-105 transition-transform duration-500">
                  <div className="text-4xl font-bold text-primary mb-2">+50</div>
-                 <div className="text-sm text-muted-foreground uppercase tracking-wider">مشروع مكتمل</div>
+                 <div className="text-sm text-muted-foreground uppercase tracking-wider">{t("why.stats")}</div>
                </div>
             </motion.div>
           </div>
@@ -196,9 +183,9 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">لنبدأ العمل معاً</h2>
+            <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">{t("contact.title")}</h2>
             <p className="text-muted-foreground">
-              هل لديك فكرة مشروع؟ تواصل معي وسأساعدك في تحويلها إلى واقع.
+              {t("contact.desc")}
             </p>
           </motion.div>
 
@@ -212,20 +199,20 @@ export default function Home() {
                 <form className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">الاسم</label>
-                      <Input placeholder="أدخل اسمك" className="bg-background/50 border-border h-12" />
+                      <label className="text-sm font-medium">{t("contact.name")}</label>
+                      <Input placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-12" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">البريد الإلكتروني</label>
+                      <label className="text-sm font-medium">{t("contact.email")}</label>
                       <Input placeholder="example@email.com" type="email" className="bg-background/50 border-border h-12" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">الرسالة</label>
-                    <Textarea placeholder="تفاصيل مشروعك..." className="bg-background/50 border-border min-h-[150px] resize-none" />
+                    <label className="text-sm font-medium">{t("contact.message")}</label>
+                    <Textarea placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[150px] resize-none" />
                   </div>
                   <Button size="lg" className="w-full h-12 text-lg font-bold rounded-xl glow transition-all active:scale-[0.98]">
-                    إرسال الرسالة
+                    {t("contact.send")}
                   </Button>
                 </form>
               </CardContent>
@@ -239,10 +226,10 @@ export default function Home() {
         <div className="container px-6 mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Code2 className="w-5 h-5 text-primary" />
-            <span className="font-bold">مطور ويب</span>
+            <span className="font-bold">{t("logo.dev")} {t("logo.web")}</span>
           </div>
           <p className="text-sm text-muted-foreground text-center md:text-right">
-            © 2024 جميع الحقوق محفوظة. صمم بكل ❤️
+            © 2024 {t("footer.rights")}
           </p>
           <div className="flex gap-4">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Github className="w-5 h-5" /></a>
