@@ -27,7 +27,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={heroBg} 
@@ -47,7 +47,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary mb-12 mt-8"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -56,7 +56,7 @@ export default function Home() {
               <span className="text-sm font-medium">{t("hero.badge")}</span>
             </motion.div>
 
-            <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-8 leading-[1.1] md:leading-[1.1] px-2">
+            <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-8 leading-[1.2] md:leading-[1.2] px-2">
               {t("hero.title1")} <br />
               <span className="text-gradient">{t("hero.title2")}</span>
             </h1>
@@ -162,7 +162,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative h-[500px] rounded-3xl overflow-hidden border border-border bg-muted/20 flex items-center justify-center group shadow-2xl"
+              className="relative h-[400px] rounded-3xl overflow-hidden border border-border bg-muted/20 flex items-center justify-center group shadow-2xl"
             >
                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
                <div className="relative text-center p-12 border border-white/10 bg-background/40 backdrop-blur-xl rounded-2xl max-w-xs transform group-hover:scale-110 transition-transform duration-700">
@@ -199,17 +199,17 @@ export default function Home() {
               <CardContent className="p-10 md:p-16">
                 <form className="space-y-10">
                   <div className="grid md:grid-cols-2 gap-10">
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2">{t("contact.name")}</label>
+                    <div className="space-y-6">
+                      <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
                       <Input placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-16 text-xl px-8 rounded-2xl focus:ring-primary shadow-sm" />
                     </div>
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2">{t("contact.email")}</label>
+                    <div className="space-y-6">
+                      <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.email")}</label>
                       <Input placeholder="example@email.com" type="email" className="bg-background/50 border-border h-16 text-xl px-8 rounded-2xl focus:ring-primary shadow-sm" />
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2">{t("contact.message")}</label>
+                  <div className="space-y-6">
+                    <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
                     <Textarea placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[220px] text-xl p-8 rounded-2xl resize-none focus:ring-primary shadow-sm" />
                   </div>
                   <Button size="lg" className="w-full h-20 text-2xl font-bold rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl">
