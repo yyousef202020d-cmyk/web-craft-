@@ -165,7 +165,7 @@ export default function Home() {
             >
                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
                <div className="relative text-center p-12 border border-white/10 bg-background/40 backdrop-blur-xl rounded-2xl max-w-xs transform group-hover:scale-110 transition-transform duration-700">
-                 <div className="text-5xl font-bold text-primary mb-4">+50</div>
+                 <div className="text-5xl font-bold text-primary mb-4">+500</div>
                  <div className="text-lg text-muted-foreground uppercase tracking-widest font-bold">{t("why.stats")}</div>
                </div>
             </motion.div>

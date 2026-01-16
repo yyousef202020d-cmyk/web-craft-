@@ -29,7 +29,7 @@ const translations = {
     "services.portfolio.desc": "مساحة خاصة لاستعراض مشاريعك وإنجازاتك بطريقة احترافية تجذب العملاء وأصحاب العمل.",
     "services.cv.title": "سيرة ذاتية تفاعلية (CV)",
     "services.cv.desc": "سيرة ذاتية رقمية تفاعلية تميزكم عن الآخرين وتبرز مهاراتكم بشكل عصري وجذاب.",
-    "why.title": "لماذا تختاروننا؟",
+    "why.title": "لماذا تختارنا؟",
     "why.item1": "تصاميم عصرية وجذابة تلفت الانتباه",
     "why.item2": "أكواد نظيفة وسريعة الأداء",
     "why.item3": "توافق كامل مع جميع الأجهزة (Mobile Responsive)",
@@ -43,8 +43,8 @@ const translations = {
     "contact.message": "الرسالة",
     "contact.send": "إرسال الرسالة",
     "footer.rights": "جميع الحقوق محفوظة. صمم بكل ❤️",
-    "logo.dev": "بيكسل",
-    "logo.web": "مود"
+    "logo.dev": "نيكسوس",
+    "logo.web": "تيك"
   },
   en: {
     "nav.home": "Home",
@@ -80,8 +80,8 @@ const translations = {
     "contact.message": "Message",
     "contact.send": "Send Message",
     "footer.rights": "All rights reserved. Crafted with ❤️",
-    "logo.dev": "Pixel",
-    "logo.web": "Mode"
+    "logo.dev": "Nexus",
+    "logo.web": "Tech"
   }
 };
 
