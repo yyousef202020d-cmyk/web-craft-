@@ -45,8 +45,8 @@
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
 
-  --font-sans: 'Cairo', 'Syne', sans-serif;
-  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Cairo', sans-serif;
   
   --radius: 0.75rem;
 }

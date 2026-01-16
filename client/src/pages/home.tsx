@@ -56,12 +56,12 @@ export default function Home() {
               <span className="text-sm font-medium">{t("hero.badge")}</span>
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-6 leading-tight">
+            <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-6 leading-tight">
               {t("hero.title1")} <br />
               <span className="text-gradient">{t("hero.title2")}</span>
             </h1>
 
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed px-4">
               {t("hero.desc")}
             </p>
 
@@ -102,7 +102,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             <ServiceCard 
               icon={Laptop}
               title={t("services.web.title")}
@@ -123,16 +123,16 @@ export default function Home() {
       </section>
 
       {/* Why Choose Me */}
-      <section className="py-24 border-y border-border/50 bg-background">
+      <section className="py-24 border-y border-border/50 bg-background overflow-hidden">
         <div className="container px-6 mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: lang === 'ar' ? 50 : -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">{t("why.title")}</h2>
+              <h2 className="text-3xl md:text-5xl font-bold font-display mb-8 leading-tight">{t("why.title")}</h2>
               <div className="space-y-6">
                 {[
                   t("why.item1"),
@@ -147,12 +147,12 @@ export default function Home() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-4"
                   >
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-primary" />
                     </div>
-                    <span className="text-lg">{item}</span>
+                    <span className="text-lg font-medium leading-tight">{item}</span>
                   </motion.div>
                 ))}
               </div>
@@ -161,12 +161,12 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative h-[400px] rounded-2xl overflow-hidden border border-border bg-muted/20 flex items-center justify-center group"
+              className="relative h-[450px] rounded-3xl overflow-hidden border border-border bg-muted/20 flex items-center justify-center group shadow-2xl"
             >
-               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-               <div className="relative text-center p-8 border border-border bg-background/50 backdrop-blur-md rounded-xl max-w-xs transform group-hover:scale-105 transition-transform duration-500">
-                 <div className="text-4xl font-bold text-primary mb-2">+50</div>
-                 <div className="text-sm text-muted-foreground uppercase tracking-wider">{t("why.stats")}</div>
+               <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+               <div className="relative text-center p-12 border border-white/10 bg-background/40 backdrop-blur-xl rounded-2xl max-w-xs transform group-hover:scale-110 transition-transform duration-700">
+                 <div className="text-5xl font-bold text-primary mb-4">+50</div>
+                 <div className="text-lg text-muted-foreground uppercase tracking-widest font-bold">{t("why.stats")}</div>
                </div>
             </motion.div>
           </div>
@@ -181,10 +181,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">{t("contact.title")}</h2>
-            <p className="text-muted-foreground">
+            <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">{t("contact.title")}</h2>
+            <p className="text-xl text-muted-foreground">
               {t("contact.desc")}
             </p>
           </motion.div>
@@ -195,23 +195,23 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <Card className="border-border/50 bg-card/50 backdrop-blur-sm shadow-2xl">
-              <CardContent className="p-8">
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">{t("contact.name")}</label>
-                      <Input placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-12" />
+              <CardContent className="p-8 md:p-12">
+                <form className="space-y-8">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                      <label className="text-sm font-bold uppercase tracking-wider opacity-70">{t("contact.name")}</label>
+                      <Input placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 text-lg px-6 rounded-2xl" />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">{t("contact.email")}</label>
-                      <Input placeholder="example@email.com" type="email" className="bg-background/50 border-border h-12" />
+                    <div className="space-y-3">
+                      <label className="text-sm font-bold uppercase tracking-wider opacity-70">{t("contact.email")}</label>
+                      <Input placeholder="example@email.com" type="email" className="bg-background/50 border-border h-14 text-lg px-6 rounded-2xl" />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">{t("contact.message")}</label>
-                    <Textarea placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[150px] resize-none" />
+                  <div className="space-y-3">
+                    <label className="text-sm font-bold uppercase tracking-wider opacity-70">{t("contact.message")}</label>
+                    <Textarea placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] text-lg p-6 rounded-2xl resize-none" />
                   </div>
-                  <Button size="lg" className="w-full h-12 text-lg font-bold rounded-xl glow transition-all active:scale-[0.98]">
+                  <Button size="lg" className="w-full h-16 text-xl font-bold rounded-2xl glow transition-all hover:scale-[1.02] active:scale-[0.98]">
                     {t("contact.send")}
                   </Button>
                 </form>
@@ -222,19 +222,19 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-border bg-background">
-        <div className="container px-6 mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <footer className="py-12 border-t border-border bg-background">
+        <div className="container px-6 mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-primary" />
-            <span className="font-bold">{t("logo.dev")} {t("logo.web")}</span>
+            <Code2 className="w-6 h-6 text-primary" />
+            <span className="font-bold text-xl">{t("logo.dev")} {t("logo.web")}</span>
           </div>
-          <p className="text-sm text-muted-foreground text-center md:text-right">
+          <p className="text-lg text-muted-foreground text-center md:text-right">
             © 2024 {t("footer.rights")}
           </p>
-          <div className="flex gap-4">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Github className="w-5 h-5" /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin className="w-5 h-5" /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="w-5 h-5" /></a>
+          <div className="flex gap-6">
+            <a href="#" className="p-2 text-muted-foreground hover:text-primary transition-colors hover:scale-110"><Github className="w-6 h-6" /></a>
+            <a href="#" className="p-2 text-muted-foreground hover:text-primary transition-colors hover:scale-110"><Linkedin className="w-6 h-6" /></a>
+            <a href="#" className="p-2 text-muted-foreground hover:text-primary transition-colors hover:scale-110"><Twitter className="w-6 h-6" /></a>
           </div>
         </div>
       </footer>
