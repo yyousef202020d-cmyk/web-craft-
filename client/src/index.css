@@ -125,4 +125,13 @@ html {
   .glow {
     box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.5);
   }
+
+  /* Fix for English text potential overlaps and spacing */
+  [lang="en"] .leading-tight {
+    line-height: 1.25;
+  }
+  
+  [lang="en"] .tracking-tight {
+    letter-spacing: -0.01em;
+  }
 }

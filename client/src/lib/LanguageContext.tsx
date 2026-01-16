@@ -43,8 +43,8 @@ const translations = {
     "contact.message": "الرسالة",
     "contact.send": "إرسال الرسالة",
     "footer.rights": "جميع الحقوق محفوظة. صمم بكل ❤️",
-    "logo.dev": "نيكسوس",
-    "logo.web": "تيك"
+    "logo.dev": "فورتكس",
+    "logo.web": "ستوديو"
   },
   en: {
     "nav.home": "Home",
@@ -80,8 +80,8 @@ const translations = {
     "contact.message": "Message",
     "contact.send": "Send Message",
     "footer.rights": "All rights reserved. Crafted with ❤️",
-    "logo.dev": "Nexus",
-    "logo.web": "Tech"
+    "logo.dev": "Vortex",
+    "logo.web": "Studio"
   }
 };
 
