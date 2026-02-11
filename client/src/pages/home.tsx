@@ -19,12 +19,50 @@ import heroBg from "@assets/generated_images/abstract_dark_tech_background_with_
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 
+import { Toaster, toast } from "sonner";
+
 export default function Home() {
   const { lang, t } = useLanguage();
+
+  const handleWhatsAppRedirect = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name");
+    const contact = formData.get("contact");
+    const message = formData.get("message");
+
+    const whatsappMessage = lang === 'ar' 
+      ? `مرحباً لوما تيك، أنا ${name}. بريدي/هاتفي: ${contact}. رسالتي: ${message}`
+      : `Hello Luma Tech, I am ${name}. My email/phone: ${contact}. Message: ${message}`;
+    
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/201018292970?text=${encodedMessage}`;
+    
+    // Show beautiful toast
+    toast.success(t("contact.success"), {
+      style: {
+        background: 'rgba(139, 92, 246, 0.1)',
+        backdropFilter: 'blur(8px)',
+        border: '1px solid rgba(139, 92, 246, 0.2)',
+        color: '#8b5cf6',
+        fontSize: '1.1rem',
+        fontWeight: 'bold',
+        padding: '1.5rem',
+        borderRadius: '1.2rem',
+      },
+      duration: 5000,
+    });
+
+    // Small delay before redirecting to let them see the message
+    setTimeout(() => {
+      window.open(whatsappUrl, '_blank');
+    }, 2000);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 overflow-x-hidden">
       <Navbar />
+      <Toaster position="top-center" expand={false} richColors />
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-12 overflow-hidden">
@@ -197,21 +235,22 @@ export default function Home() {
           >
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
-                <form className="space-y-8 md:space-y-10" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-8 md:space-y-10" onSubmit={handleWhatsAppRedirect}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
-                      <Input required placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
+                      <Input name="name" required placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
                     </div>
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.email")}</label>
                       <Input 
+                        name="contact"
                         required 
                         placeholder={t("contact.placeholder.email")}
                         className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" 
                         onBlur={(e) => {
                           const val = e.target.value;
-                          const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+                          const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
                           const isPhone = /^[0-9+]{8,15}$/.test(val.replace(/\s/g, ''));
                           if (val && !isEmail && !isPhone) {
                             e.target.setCustomValidity(lang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح أو رقم هاتف' : 'Please enter a valid email or phone number');
@@ -224,7 +263,7 @@ export default function Home() {
                   </div>
                   <div className="space-y-4">
                     <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
-                    <Textarea required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
+                    <Textarea name="message" required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
                   </div>
                   <Button type="submit" size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl">
                     {t("contact.send")}
