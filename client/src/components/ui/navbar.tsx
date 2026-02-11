@@ -20,7 +20,6 @@ export function Navbar() {
   const links = [
     { name: t("nav.home"), href: "#hero" },
     { name: t("nav.services"), href: "#services" },
-    { name: t("nav.portfolio"), href: "#portfolio" },
     { name: t("nav.contact"), href: "#contact" },
   ];
 
@@ -38,8 +37,8 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
+          <div className="flex items-center gap-8">
             {links.map((link) => (
               <a
                 key={link.name}
@@ -64,7 +63,10 @@ export function Navbar() {
               <Globe className="w-4 h-4" />
               {lang === "ar" ? "EN" : "AR"}
             </Button>
-            <Button className="rounded-full font-bold">
+            <Button 
+              className="rounded-full font-bold"
+              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               {t("nav.start")}
             </Button>
           </div>
@@ -105,7 +107,13 @@ export function Navbar() {
             <Globe className="w-4 h-4" />
             {lang === "ar" ? "English" : "العربية"}
           </Button>
-          <Button className="w-full rounded-full font-bold">
+          <Button 
+            className="w-full rounded-full font-bold"
+            onClick={() => {
+              setIsOpen(false);
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             {t("nav.start")}
           </Button>
         </div>

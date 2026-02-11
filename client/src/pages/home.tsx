@@ -197,22 +197,36 @@ export default function Home() {
           >
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
-                <form className="space-y-8 md:space-y-10">
+                <form className="space-y-8 md:space-y-10" onSubmit={(e) => e.preventDefault()}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
-                      <Input placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
+                      <Input required placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
                     </div>
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.email")}</label>
-                      <Input placeholder="example@email.com" type="email" className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
+                      <Input 
+                        required 
+                        placeholder={t("contact.placeholder.email")}
+                        className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" 
+                        onBlur={(e) => {
+                          const val = e.target.value;
+                          const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+                          const isPhone = /^[0-9+]{8,15}$/.test(val.replace(/\s/g, ''));
+                          if (val && !isEmail && !isPhone) {
+                            e.target.setCustomValidity(lang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح أو رقم هاتف' : 'Please enter a valid email or phone number');
+                          } else {
+                            e.target.setCustomValidity('');
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="space-y-4">
                     <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
-                    <Textarea placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
+                    <Textarea required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
                   </div>
-                  <Button size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl">
+                  <Button type="submit" size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl">
                     {t("contact.send")}
                   </Button>
                 </form>

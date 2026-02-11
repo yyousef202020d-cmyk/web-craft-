@@ -39,9 +39,10 @@ const translations = {
     "contact.title": "لنبدأ العمل معاً",
     "contact.desc": "هل لديك فكرة مشروع؟ تواصل معنا وسنساعدك في تحويلها إلى واقع.",
     "contact.name": "الاسم",
-    "contact.email": "البريد الإلكتروني",
+    "contact.email": "البريد الإلكتروني أو رقم الهاتف",
     "contact.message": "الرسالة",
     "contact.send": "إرسال الرسالة",
+    "contact.placeholder.email": "البريد أو رقم الهاتف",
     "footer.rights": "جميع الحقوق محفوظة. صمم بكل ❤️",
     "logo.dev": "لـومـا",
     "logo.web": "تـيك"
@@ -76,9 +77,10 @@ const translations = {
     "contact.title": "Let's Work Together",
     "contact.desc": "Have a project idea? Contact us and we'll help turn it into reality.",
     "contact.name": "Name",
-    "contact.email": "Email",
+    "contact.email": "Email or Phone Number",
     "contact.message": "Message",
     "contact.send": "Send Message",
+    "contact.placeholder.email": "Email or Phone",
     "footer.rights": "All rights reserved. Crafted with ❤️",
     "logo.dev": "Luma",
     "logo.web": "Tech"
