@@ -12,7 +12,6 @@ const translations = {
   ar: {
     "nav.home": "الرئيسية",
     "nav.services": "خدماتنا",
-    "nav.portfolio": "أعمالنا",
     "nav.contact": "تواصل معنا",
     "nav.start": "ابدأ مشروعك",
     "hero.badge": "متاحون للعمل الحر",
@@ -55,13 +54,12 @@ const translations = {
     "contact.success": "تم إرسال الرسالة بنجاح! سيتم الرد عليك خلال دقائق ✨",
     "contact.placeholder.email": "البريد أو رقم الهاتف",
     "footer.rights": "جميع الحقوق محفوظة. صمم بكل ❤️",
-    "logo.dev": "لـومـا",
-    "logo.web": "تـيك"
+    "logo.dev": "ويب",
+    "logo.web": "كرافت"
   },
   en: {
     "nav.home": "Home",
     "nav.services": "Our Services",
-    "nav.portfolio": "Our Portfolio",
     "nav.contact": "Contact Us",
     "nav.start": "Start Project",
     "hero.badge": "Available for Freelance",
@@ -104,8 +102,8 @@ const translations = {
     "contact.success": "Message sent successfully! We will reply within minutes ✨",
     "contact.placeholder.email": "Email or Phone",
     "footer.rights": "All rights reserved. Crafted with ❤️",
-    "logo.dev": "Luma",
-    "logo.web": "Tech"
+    "logo.dev": "Web",
+    "logo.web": "Craft"
   }
 };
 

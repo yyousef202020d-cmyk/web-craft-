@@ -20,7 +20,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 
 import { Toaster, toast } from "sonner";
-import { MessageCircle, Globe2, Rocket, ShieldCheck, Target } from "lucide-react";
+import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram, Music2 } from "lucide-react";
 
 export default function Home() {
   const { lang, t } = useLanguage();
@@ -54,10 +54,11 @@ export default function Home() {
         href="https://wa.me/2010182902970"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-[#8b5cf6] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:scale-110 transition-transform active:scale-95 group"
+        className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-[#8b5cf6] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:scale-110 transition-transform active:scale-95 group animate-bounce-slow"
         aria-label="Contact on WhatsApp"
       >
-        <MessageCircle className="w-8 h-8 text-white" />
+        <div className="absolute inset-0 rounded-full bg-[#8b5cf6] animate-ping opacity-20" />
+        <MessageCircle className="w-8 h-8 text-white relative z-10" />
         <span className="absolute -top-12 right-0 bg-white text-[#8b5cf6] px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
           {lang === 'ar' ? 'تواصل معنا' : 'Chat with us'}
         </span>
@@ -212,15 +213,15 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
+      <section className="py-24 md:py-40 relative overflow-hidden">
         <div className="container px-6 mx-auto max-w-7xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16 md:mb-24"
+            className="text-center mb-20 md:mb-32"
           >
-            <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">{t("benefits.title")}</h2>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold font-display mb-8 leading-tight">{t("benefits.title")}</h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               {t("benefits.desc")}
             </p>
@@ -326,9 +327,9 @@ export default function Home() {
             © 2024 {t("footer.rights")}
           </p>
           <div className="flex gap-4 md:gap-8">
-            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full"><Github className="w-6 h-6 md:w-7 h-7" /></a>
-            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full"><Linkedin className="w-6 h-6 md:w-7 h-7" /></a>
-            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full"><Twitter className="w-6 h-6 md:w-7 h-7" /></a>
+            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="Instagram"><Instagram className="w-6 h-6 md:w-7 h-7" /></a>
+            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="TikTok"><Music2 className="w-6 h-6 md:w-7 h-7" /></a>
+            <a href="https://wa.me/2010182902970" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="WhatsApp"><MessageCircle className="w-6 h-6 md:w-7 h-7" /></a>
           </div>
         </div>
       </footer>
