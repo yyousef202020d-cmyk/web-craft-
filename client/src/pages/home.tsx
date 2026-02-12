@@ -20,23 +20,13 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 
 import { Toaster, toast } from "sonner";
+import { MessageCircle, Globe2, Rocket, ShieldCheck, Target } from "lucide-react";
 
 export default function Home() {
   const { lang, t } = useLanguage();
 
   const handleWhatsAppRedirect = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const contact = formData.get("contact");
-    const message = formData.get("message");
-
-    const whatsappMessage = lang === 'ar' 
-      ? `مرحباً لوما تيك، أنا ${name}. بريدي/هاتفي: ${contact}. رسالتي: ${message}`
-      : `Hello Luma Tech, I am ${name}. My email/phone: ${contact}. Message: ${message}`;
-    
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-    const whatsappUrl = `https://wa.me/201018292970?text=${encodedMessage}`;
     
     // Show beautiful toast
     toast.success(t("contact.success"), {
@@ -52,17 +42,26 @@ export default function Home() {
       },
       duration: 5000,
     });
-
-    // Small delay before redirecting to let them see the message
-    setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
-    }, 2000);
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 overflow-x-hidden">
       <Navbar />
       <Toaster position="top-center" expand={false} richColors />
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/2010182902970"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-[#8b5cf6] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:scale-110 transition-transform active:scale-95 group"
+        aria-label="Contact on WhatsApp"
+      >
+        <MessageCircle className="w-8 h-8 text-white" />
+        <span className="absolute -top-12 right-0 bg-white text-[#8b5cf6] px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
+          {lang === 'ar' ? 'تواصل معنا' : 'Chat with us'}
+        </span>
+      </a>
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-12 overflow-hidden">
@@ -208,6 +207,47 @@ export default function Home() {
                  <div className="text-base md:text-xl text-muted-foreground uppercase tracking-widest font-bold">{t("why.stats")}</div>
                </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-24 md:py-32 relative overflow-hidden">
+        <div className="container px-6 mx-auto max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 md:mb-24"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">{t("benefits.title")}</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {t("benefits.desc")}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Globe2, key: "item1" },
+              { icon: ShieldCheck, key: "item2" },
+              { icon: Rocket, key: "item3" },
+              { icon: Target, key: "item4" }
+            ].map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-8 rounded-[2rem] bg-muted/20 border border-border/50 hover:border-primary/50 transition-all group hover:-translate-y-2"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <benefit.icon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-4">{t(`benefits.${benefit.key}.title`)}</h3>
+                <p className="text-muted-foreground leading-relaxed">{t(`benefits.${benefit.key}.desc`)}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
