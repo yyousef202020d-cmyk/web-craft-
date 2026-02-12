@@ -328,8 +328,20 @@ export default function Home() {
           </p>
           <div className="flex gap-4 md:gap-8">
             <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="Instagram"><Instagram className="w-6 h-6 md:w-7 h-7" /></a>
-            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="TikTok"><Music2 className="w-6 h-6 md:w-7 h-7" /></a>
-            <a href="https://wa.me/2010182902970" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="WhatsApp"><MessageCircle className="w-6 h-6 md:w-7 h-7" /></a>
+            <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-[#000000] dark:hover:text-white transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="TikTok">
+              <svg 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="w-6 h-6 md:w-7 h-7"
+              >
+                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+              </svg>
+            </a>
+            <a href="https://wa.me/2010182902970" className="p-2 md:p-3 text-muted-foreground hover:text-[#25D366] transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="WhatsApp"><MessageCircle className="w-6 h-6 md:w-7 h-7" /></a>
           </div>
         </div>
       </footer>
