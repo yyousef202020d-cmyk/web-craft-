@@ -94,9 +94,9 @@ export default function Home() {
               <span className="text-sm font-medium">{t("hero.badge")}</span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-8 leading-[1.2] px-2">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight mb-8 leading-[1.3] px-2 py-2">
               {t("hero.title1")} <br />
-              <span className="text-gradient">{t("hero.title2")}</span>
+              <span className="text-gradient inline-block py-1">{t("hero.title2")}</span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed px-4">
@@ -324,7 +324,7 @@ export default function Home() {
             <span className="font-bold text-xl md:text-2xl tracking-tight">{t("logo.dev")} {t("logo.web")}</span>
           </div>
           <p className="text-base md:text-lg text-muted-foreground text-center md:text-right">
-            © 2024 {t("footer.rights")}
+            © 2026 {t("footer.rights")}
           </p>
           <div className="flex gap-4 md:gap-8">
             <a href="#" className="p-2 md:p-3 text-muted-foreground hover:text-primary transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="Instagram"><Instagram className="w-6 h-6 md:w-7 h-7" /></a>
