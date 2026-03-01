@@ -1,13 +1,15 @@
-import { Link } from "wouter";
-import { Menu, X, Code2, Moon, Sun, Globe } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Menu, X, Code2, Moon, Sun, Globe, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/LanguageContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
   const { lang, setLang, t } = useLanguage();
+  const [location] = useLocation();
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -45,6 +47,7 @@ export function Navbar() {
                 href={link.href}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
                 onClick={(e) => {
+                  if (location !== "/") return;
                   e.preventDefault();
                   document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
                 }}
@@ -56,6 +59,27 @@ export function Navbar() {
           </div>
           
           <div className="flex items-center gap-2 border-l border-border/50 pl-4 rtl:border-l-0 rtl:border-r rtl:pr-4">
+            {/* Pricing Button - Desktop */}
+            <Link href="/pricing">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold flex items-center gap-2 overflow-hidden group mx-2"
+              >
+                <motion.div
+                  animate={{ 
+                    opacity: [0.4, 1, 0.4],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="absolute inset-0 pointer-events-none"
+                >
+                  <Sparkles className="absolute top-1 right-1 w-2 h-2 text-primary/40 animate-pulse" />
+                  <Sparkles className="absolute bottom-1 left-2 w-2 h-2 text-primary/40 animate-pulse delay-75" />
+                </motion.div>
+                <span className="relative z-10">{t("nav.pricing")}</span>
+              </motion.button>
+            </Link>
+
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
               {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
@@ -65,59 +89,89 @@ export function Navbar() {
             </Button>
             <Button 
               className="rounded-full font-bold"
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                if (location !== "/") {
+                  window.location.href = "/#contact";
+                  return;
+                }
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               {t("nav.start")}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Actions */}
         <div className="flex items-center gap-2 md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
-            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          {/* Pricing Button - Mobile (Always Visible) */}
+          <Link href="/pricing">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold flex items-center gap-1 overflow-hidden group"
+            >
+              <Sparkles className="w-3 h-3 text-primary/60 animate-pulse" />
+              <span className="relative z-10">{t("nav.pricing")}</span>
+            </motion.button>
+          </Link>
+
+          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full w-9 h-9">
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </Button>
           <button
             className="p-2 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X /> : <Menu />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-20 left-0 right-0 bg-background border-b border-border p-6 flex flex-col gap-4 animate-in slide-in-from-top-5">
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-lg font-medium text-foreground py-2 border-b border-border/50"
-              onClick={(e) => {
-                e.preventDefault();
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border p-6 flex flex-col gap-4 overflow-hidden"
+          >
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-lg font-medium text-foreground py-2 border-b border-border/50"
+                onClick={(e) => {
+                  setIsOpen(false);
+                  if (location !== "/") return;
+                  e.preventDefault();
+                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {t(link.name)}
+              </a>
+            ))}
+            <Button variant="outline" onClick={toggleLang} className="w-full gap-2">
+              <Globe className="w-4 h-4" />
+              {lang === "ar" ? "English" : "العربية"}
+            </Button>
+            <Button 
+              className="w-full rounded-full font-bold"
+              onClick={() => {
                 setIsOpen(false);
-                document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                if (location !== "/") {
+                  window.location.href = "/#contact";
+                  return;
+                }
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              {link.name}
-            </a>
-          ))}
-          <Button variant="outline" onClick={toggleLang} className="w-full gap-2">
-            <Globe className="w-4 h-4" />
-            {lang === "ar" ? "English" : "العربية"}
-          </Button>
-          <Button 
-            className="w-full rounded-full font-bold"
-            onClick={() => {
-              setIsOpen(false);
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            {t("nav.start")}
-          </Button>
-        </div>
-      )}
+              {t("nav.start")}
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
