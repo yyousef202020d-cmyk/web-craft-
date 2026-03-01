@@ -3,7 +3,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Sparkles, Rocket, Crown, Star } from "lucide-react";
-import Navbar from "@/components/ui/navbar";
+import { Navbar } from "@/components/ui/navbar";
 
 export default function Pricing() {
   const { t, lang } = useLanguage();
