@@ -10,9 +10,6 @@ import {
   Briefcase, 
   ArrowLeft, 
   CheckCircle2, 
-  Github, 
-  Linkedin, 
-  Twitter,
   Code2
 } from "lucide-react";
 import heroBg from "@assets/generated_images/abstract_dark_tech_background_with_neon_gradients.png";
@@ -20,7 +17,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 
 import { Toaster, toast } from "sonner";
-import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram, Music2 } from "lucide-react";
+import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "lucide-react";
 
 export default function Home() {
   const { lang, t } = useLanguage();
@@ -28,20 +25,38 @@ export default function Home() {
   const handleWhatsAppRedirect = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    // Construct WhatsApp message
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const contact = formData.get('contact');
+    const message = formData.get('message');
+    
+    const whatsappMessage = lang === 'ar' 
+      ? `مرحباً ويب كرافت 👋\n\nأود الاستفسار عن خدماتكم ✨\n\n👤 الاسم: ${name}\n📱 وسيلة التواصل: ${contact}\n\n📝 الرسالة:\n${message}\n\nتم الإرسال من الموقع الإلكتروني 🌐`
+      : `Hello Web Craft 👋\n\nI'm interested in your services ✨\n\n👤 Name: ${name}\n📱 Contact: ${contact}\n\n📝 Message:\n${message}\n\nSent via Website 🌐`;
+    
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/201208552424?text=${encodedMessage}`;
+    
     // Show beautiful toast
     toast.success(t("contact.success"), {
       style: {
-        background: 'rgba(139, 92, 246, 0.1)',
+        background: 'rgba(37, 211, 102, 0.1)',
         backdropFilter: 'blur(8px)',
-        border: '1px solid rgba(139, 92, 246, 0.2)',
-        color: '#8b5cf6',
+        border: '1px solid rgba(37, 211, 102, 0.2)',
+        color: '#25D366',
         fontSize: '1.1rem',
         fontWeight: 'bold',
         padding: '1.5rem',
         borderRadius: '1.2rem',
       },
-      duration: 5000,
+      duration: 3000,
     });
+
+    // Redirect after a short delay to let toast be seen
+    setTimeout(() => {
+      window.open(whatsappUrl, '_blank');
+    }, 800);
   };
 
   return (
@@ -51,15 +66,15 @@ export default function Home() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/201018292970"
+        href="https://wa.me/201208552424"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-[#8b5cf6] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:scale-110 transition-transform active:scale-95 group animate-bounce-slow"
+        className="fixed bottom-8 right-8 z-[100] w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform active:scale-95 group animate-bounce-slow"
         aria-label="Contact on WhatsApp"
       >
-        <div className="absolute inset-0 rounded-full bg-[#8b5cf6] animate-ping opacity-20" />
+        <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20" />
         <MessageCircle className="w-8 h-8 text-white relative z-10" />
-        <span className="absolute -top-12 right-0 bg-white text-[#8b5cf6] px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
+        <span className="absolute -top-12 right-0 bg-white text-[#25D366] px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
           {lang === 'ar' ? 'تواصل معنا' : 'Chat with us'}
         </span>
       </a>
@@ -341,7 +356,7 @@ export default function Home() {
                 <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
               </svg>
             </a>
-            <a href="https://wa.me/2010182902970" target="_blank" rel="noopener noreferrer" className="p-2 md:p-3 text-muted-foreground hover:text-[#25D366] transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="WhatsApp"><MessageCircle className="w-6 h-6 md:w-7 h-7" /></a>
+            <a href="https://wa.me/201208552424" target="_blank" rel="noopener noreferrer" className="p-2 md:p-3 text-muted-foreground hover:text-[#25D366] transition-all hover:scale-125 bg-muted/20 rounded-full" aria-label="WhatsApp"><MessageCircle className="w-6 h-6 md:w-7 h-7" /></a>
           </div>
         </div>
       </footer>

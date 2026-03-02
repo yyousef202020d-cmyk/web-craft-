@@ -1,70 +1,87 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Sparkles, Rocket, Crown, Star } from "lucide-react";
+import { Check, Sparkles, Rocket, Crown, Star, Laptop, Briefcase, FileText, ArrowRight, Home } from "lucide-react";
 import { Navbar } from "@/components/ui/navbar";
+import { Link } from "wouter";
 
 export default function Pricing() {
   const { t, lang } = useLanguage();
+  const [activeTab, setActiveTab] = useState<"web" | "portfolio" | "cv">("web");
 
-  const plans = [
-    {
-      name: lang === "ar" ? "المصغر" : "Starter",
-      price: lang === "ar" ? "1500" : "40",
-      icon: Rocket,
-      features: lang === "ar" ? [
-        "صفحة واحدة احترافية",
-        "تصميم متجاوب بالكامل",
-        "ربط وسائل التواصل",
-        "دعم فني لمدة شهر",
-      ] : [
-        "One Professional Page",
-        "Fully Responsive Design",
-        "Social Media Integration",
-        "1 Month Technical Support",
-      ],
-      recommended: false
-    },
-    {
-      name: lang === "ar" ? "الاحترافي" : "Professional",
-      price: lang === "ar" ? "3500" : "90",
-      icon: Crown,
-      features: lang === "ar" ? [
-        "حتى 5 صفحات",
-        "لوحة تحكم بسيطة",
-        "تحسين محركات البحث SEO",
-        "دعم فني لمدة 3 أشهر",
-        "تعديلات غير محدودة"
-      ] : [
-        "Up to 5 Pages",
-        "Simple Dashboard",
-        "SEO Optimization",
-        "3 Months Technical Support",
-        "Unlimited Revisions"
-      ],
-      recommended: true
-    },
-    {
-      name: lang === "ar" ? "المتكامل" : "Enterprise",
-      price: lang === "ar" ? "7500+" : "200+",
-      icon: Star,
-      features: lang === "ar" ? [
-        "موقع متكامل / متجر",
-        "نظام إدارة محتوى متقدم",
-        "ربط بوابات دفع",
-        "دعم فني لمدة سنة",
-        "تدريب على الاستخدام"
-      ] : [
-        "Full Website / Store",
-        "Advanced CMS",
-        "Payment Gateway Integration",
-        "1 Year Technical Support",
-        "User Training"
-      ],
-      recommended: false
-    }
-  ];
+  const pricingData = {
+    web: [
+      {
+        name: lang === "ar" ? "المصغر" : "Starter",
+        price: lang === "ar" ? "1500" : "40",
+        icon: Rocket,
+        features: lang === "ar" ? ["صفحة واحدة احترافية", "تصميم متجاوب بالكامل", "ربط وسائل التواصل", "دعم فني لمدة شهر"] : ["One Professional Page", "Fully Responsive Design", "Social Media Integration", "1 Month Technical Support"],
+        recommended: false
+      },
+      {
+        name: lang === "ar" ? "الاحترافي" : "Professional",
+        price: lang === "ar" ? "3500" : "90",
+        icon: Crown,
+        features: lang === "ar" ? ["حتى 5 صفحات", "لوحة تحكم بسيطة", "تحسين محركات البحث SEO", "دعم فني لمدة 3 أشهر", "تعديلات غير محدودة"] : ["Up to 5 Pages", "Simple Dashboard", "SEO Optimization", "3 Months Technical Support", "Unlimited Revisions"],
+        recommended: true
+      },
+      {
+        name: lang === "ar" ? "المتكامل" : "Enterprise",
+        price: lang === "ar" ? "7500+" : "200+",
+        icon: Star,
+        features: lang === "ar" ? ["موقع متكامل / متجر", "نظام إدارة محتوى متقدم", "ربط بوابات دفع", "دعم فني لمدة سنة", "تدريب على الاستخدام"] : ["Full Website / Store", "Advanced CMS", "Payment Gateway Integration", "1 Year Technical Support", "User Training"],
+        recommended: false
+      }
+    ],
+    portfolio: [
+      {
+        name: lang === "ar" ? "الشخصي" : "Personal",
+        price: lang === "ar" ? "1200" : "30",
+        icon: Rocket,
+        features: lang === "ar" ? ["صفحة تعريفية واحدة", "معرض صور للمشاريع", "روابط تواصل اجتماعي", "تصميم عصري"] : ["Single Bio Page", "Project Gallery", "Social Links", "Modern Design"],
+        recommended: false
+      },
+      {
+        name: lang === "ar" ? "المبدع" : "Creative",
+        price: lang === "ar" ? "2500" : "65",
+        icon: Crown,
+        features: lang === "ar" ? ["تصميم مخصص بالكامل", "نظام تصفية للمشاريع", "أنيميشن متقدم", "دعم فني شهرين"] : ["Fully Custom Design", "Project Filtering", "Advanced Animations", "2 Months Support"],
+        recommended: true
+      },
+      {
+        name: lang === "ar" ? "الخبير" : "Expert",
+        price: lang === "ar" ? "4500" : "115",
+        icon: Star,
+        features: lang === "ar" ? ["دومين مجاني لسنة", "كتابة محتوى احترافية", "تحسين محركات البحث", "تعديلات مدى الحياة"] : ["Free Domain 1 Year", "Pro Content Writing", "SEO Optimization", "Lifetime Edits"],
+        recommended: false
+      }
+    ],
+    cv: [
+      {
+        name: lang === "ar" ? "الأساسي" : "Basic",
+        price: lang === "ar" ? "500" : "15",
+        icon: Rocket,
+        features: lang === "ar" ? ["سيرة ذاتية صفحة واحدة", "رابط QR مخصص", "تنزيل بصيغة PDF", "تنسيق احترافي"] : ["1-Page Interactive CV", "Custom QR Link", "PDF Download", "Professional Layout"],
+        recommended: false
+      },
+      {
+        name: lang === "ar" ? "المتميز" : "Premium",
+        price: lang === "ar" ? "1000" : "25",
+        icon: Crown,
+        features: lang === "ar" ? ["رابط ويب خاص", "دعم لغتين", "أنيميشن للعناصر", "تعديلات لمدة سنة"] : ["Live Web Link", "Bilingual Support", "Element Animations", "1 Year Updates"],
+        recommended: true
+      },
+      {
+        name: lang === "ar" ? "الذهبي" : "Gold",
+        price: lang === "ar" ? "1800" : "45",
+        icon: Star,
+        features: lang === "ar" ? ["فيديو تعريفي مدمج", "تتبع زيارات الـ CV", "تحليل كلمات مفتاحية", "دعم VIP"] : ["Integrated Intro Video", "Visit Tracking", "Keyword Analysis", "VIP Support"],
+        recommended: false
+      }
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
@@ -75,27 +92,54 @@ export default function Pricing() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
+            <div className="flex justify-center mb-8">
+               <Link href="/">
+                <Button variant="ghost" className="rounded-full gap-2 text-primary hover:bg-primary/10">
+                  <Home className="w-4 h-4" />
+                  {t("pricing.back")}
+                </Button>
+               </Link>
+            </div>
             <h1 className="text-4xl md:text-6xl font-bold font-display mb-6">
               {lang === "ar" ? "خطط الأسعار" : "Pricing Plans"}
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              {lang === "ar" 
-                ? "اختر الخطة المناسبة لمشروعك وابدأ رحلة النجاح الرقمي معنا اليوم."
-                : "Choose the right plan for your project and start your digital success journey with us today."}
-            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {plans.map((plan, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+          {/* Service Selector Tabs */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            {[
+              { id: "web", icon: Laptop, label: t("pricing.nav.web") },
+              { id: "portfolio", icon: Briefcase, label: t("pricing.nav.portfolio") },
+              { id: "cv", icon: FileText, label: t("pricing.nav.cv") },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all duration-300 ${
+                  activeTab === tab.id 
+                  ? "bg-primary text-white shadow-lg scale-105" 
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                }`}
               >
-                <Card className={`relative h-full border-2 transition-all duration-300 hover:scale-105 ${
+                <tab.icon className="w-5 h-5" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            >
+              {pricingData[activeTab].map((plan, index) => (
+                <Card key={index} className={`relative h-full border-2 transition-all duration-300 hover:scale-105 ${
                   plan.recommended ? "border-primary shadow-[0_0_30px_rgba(139,92,246,0.2)] bg-primary/5" : "border-border hover:border-primary/50"
                 }`}>
                   {plan.recommended && (
@@ -122,10 +166,8 @@ export default function Pricing() {
                     <ul className="space-y-4">
                       {plan.features.map((feature, fIndex) => (
                         <li key={fIndex} className="flex items-center gap-3">
-                          <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
-                            <Check className="w-3 h-3 text-primary" />
-                          </div>
-                          <span className="text-muted-foreground text-sm md:text-base">{feature}</span>
+                          <Check className="w-4 h-4 text-primary shrink-0" />
+                          <span className="text-muted-foreground text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -133,19 +175,17 @@ export default function Pricing() {
                       className={`w-full h-12 rounded-xl font-bold text-lg ${
                         plan.recommended ? "bg-primary hover:bg-primary/90 text-white" : "bg-secondary hover:bg-secondary/80"
                       }`}
-                      onClick={() => window.location.href = `https://wa.me/2010182902970?text=${encodeURIComponent(
-                        lang === "ar" 
-                          ? `مرحباً ويب كرافت، أود الاستفسار عن خطة ${plan.name}`
-                          : `Hello Web Craft, I'd like to inquire about the ${plan.name} plan`
-                      )}`}
+                      onClick={() => {
+                        window.location.href = "/#contact";
+                      }}
                     >
                       {lang === "ar" ? "ابدأ الآن" : "Get Started"}
                     </Button>
                   </CardContent>
                 </Card>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
     </div>

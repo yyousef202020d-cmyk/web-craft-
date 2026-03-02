@@ -56,7 +56,11 @@ const translations = {
     "contact.placeholder.email": "البريد أو رقم الهاتف",
     "footer.rights": "جميع الحقوق محفوظة. صمم بكل ❤️",
     "logo.dev": "ويب",
-    "logo.web": "كرافت"
+    "logo.web": "كرافت",
+    "pricing.nav.web": "مواقع",
+    "pricing.nav.portfolio": "بورتفوليو",
+    "pricing.nav.cv": "سيفي",
+    "pricing.back": "العودة للرئيسية"
   },
   en: {
     "nav.home": "Home",
@@ -105,7 +109,11 @@ const translations = {
     "contact.placeholder.email": "Email or Phone",
     "footer.rights": "All rights reserved. Crafted with ❤️",
     "logo.dev": "Web",
-    "logo.web": "Craft"
+    "logo.web": "Craft",
+    "pricing.nav.web": "Websites",
+    "pricing.nav.portfolio": "Portfolios",
+    "pricing.nav.cv": "CV",
+    "pricing.back": "Back to Home"
   }
 };
 

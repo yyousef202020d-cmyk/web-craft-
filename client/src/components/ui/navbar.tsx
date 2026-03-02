@@ -25,32 +25,44 @@ export function Navbar() {
     { name: t("nav.contact"), href: "#contact" },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setIsOpen(false);
+    if (location !== "/") {
+      window.location.href = "/" + href;
+      return;
+    }
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const id = href.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="container mx-auto px-4 lg:px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group cursor-pointer">
+        <Link href="/" className="flex items-center gap-2 group cursor-pointer flex-shrink-0">
           <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
             <Code2 className="w-6 h-6 text-primary" />
           </div>
-          <span className="font-display font-bold text-xl tracking-tight">
+          <span className="font-display font-bold text-xl tracking-tight hidden sm:inline-block">
             {t("logo.dev")}<span className="text-primary">{t("logo.web")}</span>
           </span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 lg:gap-8">
+          <div className="flex items-center gap-4 lg:gap-8">
             {links.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
-                onClick={(e) => {
-                  if (location !== "/") return;
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={(e) => handleNavClick(e, link.href)}
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
@@ -64,7 +76,7 @@ export function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold flex items-center gap-2 overflow-hidden group mx-2"
+                className="relative px-4 lg:px-6 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold flex-shrink-0 flex items-center gap-2 overflow-hidden group mx-2 shadow-[0_0_15px_rgba(139,92,246,0.1)]"
               >
                 <motion.div
                   animate={{ 
@@ -83,18 +95,22 @@ export function Navbar() {
             <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
               {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
-            <Button variant="ghost" size="sm" onClick={toggleLang} className="gap-2 font-bold">
+            <Button variant="ghost" size="sm" onClick={toggleLang} className="gap-2 font-bold min-w-[60px]">
               <Globe className="w-4 h-4" />
               {lang === "ar" ? "EN" : "AR"}
             </Button>
             <Button 
-              className="rounded-full font-bold"
+              className="rounded-full font-bold px-6"
               onClick={() => {
                 if (location !== "/") {
                   window.location.href = "/#contact";
                   return;
                 }
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                setIsOpen(false);
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
               }}
             >
               {t("nav.start")}
@@ -141,15 +157,10 @@ export function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium text-foreground py-2 border-b border-border/50"
-                onClick={(e) => {
-                  setIsOpen(false);
-                  if (location !== "/") return;
-                  e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                className="text-lg font-medium text-foreground py-4 border-b border-border/50"
+                onClick={(e) => handleNavClick(e, link.href)}
               >
-                {t(link.name)}
+                {link.name}
               </a>
             ))}
             <Button variant="outline" onClick={toggleLang} className="w-full gap-2">
@@ -157,14 +168,17 @@ export function Navbar() {
               {lang === "ar" ? "English" : "العربية"}
             </Button>
             <Button 
-              className="w-full rounded-full font-bold"
+              className="w-full rounded-full font-bold h-14"
               onClick={() => {
                 setIsOpen(false);
                 if (location !== "/") {
                   window.location.href = "/#contact";
                   return;
                 }
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
               }}
             >
               {t("nav.start")}
