@@ -85,8 +85,8 @@ export function Navbar() {
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute inset-0 pointer-events-none"
                 >
-                  <Sparkles className="absolute top-1 right-1 w-2 h-2 text-primary/40 animate-pulse" />
-                  <Sparkles className="absolute bottom-1 left-2 w-2 h-2 text-primary/40 animate-pulse delay-75" />
+                  <Sparkles className="absolute top-1 right-1 w-2 h-2 text-yellow-400 animate-pulse" />
+                  <Sparkles className="absolute bottom-1 left-2 w-2 h-2 text-yellow-500 animate-pulse delay-75" />
                 </motion.div>
                 <span className="relative z-10">{t("nav.pricing")}</span>
               </motion.button>
@@ -127,7 +127,7 @@ export function Navbar() {
               whileTap={{ scale: 0.95 }}
               className="relative px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold flex items-center gap-1 overflow-hidden group"
             >
-              <Sparkles className="w-3 h-3 text-primary/60 animate-pulse" />
+              <Sparkles className="w-3 h-3 text-yellow-400 animate-pulse" />
               <span className="relative z-10">{t("nav.pricing")}</span>
             </motion.button>
           </Link>

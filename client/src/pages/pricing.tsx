@@ -177,6 +177,11 @@ export default function Pricing() {
                       }`}
                       onClick={() => {
                         window.location.href = "/#contact";
+                        // Small delay to ensure section is reached
+                        setTimeout(() => {
+                          const element = document.getElementById('contact');
+                          if (element) element.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
                       }}
                     >
                       {lang === "ar" ? "ابدأ الآن" : "Get Started"}
