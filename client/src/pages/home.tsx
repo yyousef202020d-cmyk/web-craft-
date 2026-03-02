@@ -15,6 +15,7 @@ import {
 import heroBg from "@assets/generated_images/abstract_dark_tech_background_with_neon_gradients.png";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useEffect } from "react";
 
 import { Toaster, toast } from "sonner";
 import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "lucide-react";
@@ -25,7 +26,6 @@ export default function Home() {
   const handleWhatsAppRedirect = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Show beautiful toast
     toast.success(t("contact.success"), {
       style: {
         background: 'rgba(139, 92, 246, 0.1)',
@@ -40,6 +40,42 @@ export default function Home() {
       duration: 5000,
     });
   };
+
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          const performScroll = () => {
+            const offset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "auto" // Use "auto" for more reliable immediate jumps
+            });
+          };
+
+          // Execute multiple times to catch layout shifts
+          performScroll();
+          const timers = [100, 300, 600, 1000, 2000].map(ms => setTimeout(performScroll, ms));
+          
+          return () => timers.forEach(clearTimeout);
+        }
+      }
+    };
+
+    handleHashScroll();
+    window.addEventListener('hashchange', handleHashScroll);
+    window.addEventListener('load', handleHashScroll);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashScroll);
+      window.removeEventListener('load', handleHashScroll);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 overflow-x-hidden">
@@ -104,7 +140,15 @@ export default function Home() {
               <Button 
                 size="lg" 
                 className="rounded-full text-lg h-16 px-10 w-full sm:w-auto glow shadow-xl hover:scale-105 transition-transform"
-                onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const element = document.getElementById('services');
+                  if (element) {
+                    const offset = 100;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                  }
+                }}
               >
                 {t("hero.cta1")}
                 <ArrowLeft className={`mr-2 h-6 w-6 transition-transform ${lang === 'en' ? 'rotate-180' : 'rotate-0'}`} />
@@ -113,7 +157,15 @@ export default function Home() {
                 size="lg" 
                 variant="outline" 
                 className="rounded-full text-lg h-16 px-10 w-full sm:w-auto bg-background/50 backdrop-blur-md border-white/10 hover:bg-white/5 shadow-lg"
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    const offset = 100;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                  }
+                }}
               >
                 {t("hero.cta2")}
               </Button>

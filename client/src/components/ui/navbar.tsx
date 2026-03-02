@@ -19,32 +19,66 @@ export function Navbar() {
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   const toggleLang = () => setLang(lang === "ar" ? "en" : "ar");
 
-  const links = [
-    { name: t("nav.home"), href: "#hero" },
-    { name: t("nav.services"), href: "#services" },
-    { name: t("nav.contact"), href: "#contact" },
-  ];
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: any, href: string) => {
     setIsOpen(false);
-    if (location !== "/") {
-      window.location.href = "/" + href;
-      return;
-    }
+    
     if (href.startsWith("#")) {
-      e.preventDefault();
       const id = href.replace("#", "");
+      
+      if (window.location.pathname !== "/") {
+        window.location.assign("/#" + id);
+        return;
+      }
+      
+      if (e && e.preventDefault) e.preventDefault();
+      
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        const offset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
       }
+    } else {
+      window.location.href = href;
     }
   };
+
+  const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
+    <>
+      <a
+        href="#hero"
+        className={mobile ? "text-lg font-medium text-foreground py-4 border-b border-border/50 block w-full" : "text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"}
+        onClick={(e) => handleNavClick(e, "#hero")}
+      >
+        {t("nav.home")}
+        {!mobile && <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />}
+      </a>
+      <a
+        href="#services"
+        className={mobile ? "text-lg font-medium text-foreground py-4 border-b border-border/50 block w-full" : "text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"}
+        onClick={(e) => handleNavClick(e, "#services")}
+      >
+        {t("nav.services")}
+        {!mobile && <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />}
+      </a>
+      <a
+        href="#contact"
+        className={mobile ? "text-lg font-medium text-foreground py-4 border-b border-border/50 block w-full" : "text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"}
+        onClick={(e) => handleNavClick(e, "#contact")}
+      >
+        {t("nav.contact")}
+        {!mobile && <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />}
+      </a>
+    </>
+  );
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
       <div className="container mx-auto px-4 lg:px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group cursor-pointer flex-shrink-0">
           <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
             <Code2 className="w-6 h-6 text-primary" />
@@ -54,24 +88,12 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-4 lg:gap-8">
           <div className="flex items-center gap-4 lg:gap-8">
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
-                onClick={(e) => handleNavClick(e, link.href)}
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-              </a>
-            ))}
+            <NavLinks />
           </div>
           
           <div className="flex items-center gap-2 border-l border-border/50 pl-4 rtl:border-l-0 rtl:border-r rtl:pr-4">
-            {/* Pricing Button - Desktop */}
             <Link href="/pricing">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -79,9 +101,7 @@ export function Navbar() {
                 className="relative px-4 lg:px-6 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold flex-shrink-0 flex items-center gap-2 overflow-hidden group mx-2 shadow-[0_0_15px_rgba(139,92,246,0.1)]"
               >
                 <motion.div
-                  animate={{ 
-                    opacity: [0.4, 1, 0.4],
-                  }}
+                  animate={{ opacity: [0.4, 1, 0.4] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute inset-0 pointer-events-none"
                 >
@@ -101,26 +121,14 @@ export function Navbar() {
             </Button>
             <Button 
               className="rounded-full font-bold px-6"
-              onClick={() => {
-                if (location !== "/") {
-                  window.location.href = "/#contact";
-                  return;
-                }
-                setIsOpen(false);
-                const element = document.getElementById('contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              onClick={(e) => handleNavClick(e, "#contact")}
             >
               {t("nav.start")}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Actions */}
         <div className="flex items-center gap-2 md:hidden">
-          {/* Pricing Button - Mobile (Always Visible) */}
           <Link href="/pricing">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -135,16 +143,12 @@ export function Navbar() {
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full w-9 h-9">
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </Button>
-          <button
-            className="p-2 text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          <button className="p-2 text-foreground" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -153,33 +157,14 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border p-6 flex flex-col gap-4 overflow-hidden"
           >
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-lg font-medium text-foreground py-4 border-b border-border/50"
-                onClick={(e) => handleNavClick(e, link.href)}
-              >
-                {link.name}
-              </a>
-            ))}
-            <Button variant="outline" onClick={toggleLang} className="w-full gap-2">
+            <NavLinks mobile />
+            <Button variant="outline" onClick={toggleLang} className="w-full gap-2 mt-2">
               <Globe className="w-4 h-4" />
               {lang === "ar" ? "English" : "العربية"}
             </Button>
             <Button 
-              className="w-full rounded-full font-bold h-14"
-              onClick={() => {
-                setIsOpen(false);
-                if (location !== "/") {
-                  window.location.href = "/#contact";
-                  return;
-                }
-                const element = document.getElementById('contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              className="w-full rounded-full font-bold h-14 mt-2"
+              onClick={(e) => handleNavClick(e, "#contact")}
             >
               {t("nav.start")}
             </Button>
