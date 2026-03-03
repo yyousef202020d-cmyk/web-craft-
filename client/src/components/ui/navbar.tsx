@@ -25,30 +25,29 @@ export function Navbar() {
     if (href.startsWith("#")) {
       const id = href.replace("#", "");
       
-      // If we're not on the home page, redirect to home page with hash
       if (window.location.pathname !== "/") {
-        window.location.assign("/#" + id);
+        window.location.href = "/#" + id;
         return;
       }
       
-      // If we're on the home page, handle smooth scroll
       if (e && e.preventDefault) e.preventDefault();
       
-      const element = document.getElementById(id);
-      if (element) {
-        const offset = 100;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-      }
+      // Delay to allow menu animation to finish and layout to stabilize
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }, 300);
     } else {
-      // For non-hash links (like /pricing), scroll to top
       if (e && e.preventDefault) e.preventDefault();
       window.location.assign(href);
-      window.scrollTo(0, 0);
     }
   };
 

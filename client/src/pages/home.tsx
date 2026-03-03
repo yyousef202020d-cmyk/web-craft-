@@ -189,7 +189,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
             <ServiceCard 
               icon={Laptop}
               title={t("services.web.title")}
@@ -199,6 +199,11 @@ export default function Home() {
               icon={Briefcase}
               title={t("services.portfolio.title")}
               description={t("services.portfolio.desc")}
+            />
+            <ServiceCard 
+              icon={Rocket}
+              title={t("services.store.title")}
+              description={t("services.store.desc")}
             />
             <ServiceCard 
               icon={FileText}
