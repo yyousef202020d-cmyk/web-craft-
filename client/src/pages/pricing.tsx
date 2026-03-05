@@ -9,7 +9,7 @@ import { Link } from "wouter";
 
 export default function Pricing() {
   const { t, lang } = useLanguage();
-  const [activeTab, setActiveTab] = useState<"web" | "portfolio" | "cv">("web");
+  const [activeTab, setActiveTab] = useState<"web" | "portfolio" | "store" | "cv">("web");
 
   const pricingData = {
     web: [
@@ -55,6 +55,29 @@ export default function Pricing() {
         price: lang === "ar" ? "4500" : "115",
         icon: Star,
         features: lang === "ar" ? ["دومين مجاني لسنة", "كتابة محتوى احترافية", "تحسين محركات البحث", "تعديلات مدى الحياة"] : ["Free Domain 1 Year", "Pro Content Writing", "SEO Optimization", "Lifetime Edits"],
+        recommended: false
+      }
+    ],
+    store: [
+      {
+        name: lang === "ar" ? "المتجر الأساسي" : "Basic Store",
+        price: lang === "ar" ? "4000" : "100",
+        icon: Rocket,
+        features: lang === "ar" ? ["إضافة حتى 20 منتج", "نظام سلة مشتريات", "لوحة تحكم للمنتجات", "ربط واتساب للطلبات"] : ["Up to 20 Products", "Shopping Cart System", "Product Dashboard", "WhatsApp Ordering"],
+        recommended: false
+      },
+      {
+        name: lang === "ar" ? "متجر البراند" : "Brand Store",
+        price: lang === "ar" ? "8500" : "220",
+        icon: Crown,
+        features: lang === "ar" ? ["منتجات غير محدودة", "بوابات دفع إلكترونية", "نظام تتبع الطلبات", "تقارير مبيعات شهرية", "دعم فني 6 أشهر"] : ["Unlimited Products", "Payment Gateways", "Order Tracking", "Monthly Sales Reports", "6 Months Support"],
+        recommended: true
+      },
+      {
+        name: lang === "ar" ? "متجر متكامل" : "Enterprise Store",
+        price: lang === "ar" ? "15000+" : "380+",
+        icon: Star,
+        features: lang === "ar" ? ["تطبيق موبايل مدمج", "ربط مع شركات الشحن", "نظام تسويق بالعمولة", "دعم فني سنة كاملة"] : ["Mobile App Integration", "Shipping Integration", "Affiliate System", "1 Year Support"],
         recommended: false
       }
     ],
@@ -116,6 +139,7 @@ export default function Pricing() {
             {[
               { id: "web", icon: Laptop, label: t("pricing.nav.web") },
               { id: "portfolio", icon: Briefcase, label: t("pricing.nav.portfolio") },
+              { id: "store", icon: Rocket, label: t("pricing.nav.store") },
               { id: "cv", icon: FileText, label: t("pricing.nav.cv") },
             ].map((tab) => (
               <button
@@ -176,9 +200,7 @@ export default function Pricing() {
                       ))}
                     </ul>
                     <Button 
-                      className={`w-full h-12 rounded-xl font-bold text-lg ${
-                        plan.recommended ? "bg-primary hover:bg-primary/90 text-white" : "bg-secondary hover:bg-secondary/80"
-                      }`}
+                      className="w-full h-12 rounded-xl font-bold text-lg bg-primary hover:bg-primary/90 text-white shadow-[0_0_15px_rgba(139,92,246,0.3)]"
                       onClick={() => {
                         window.location.href = "/#contact";
                       }}

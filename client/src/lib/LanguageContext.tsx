@@ -56,11 +56,12 @@ const translations = {
     "contact.send": "إرسال الرسالة",
     "contact.success": "تم إرسال الرسالة بنجاح! سيتم الرد عليك خلال دقائق ✨",
     "contact.placeholder.email": "البريد أو رقم الهاتف",
-    "footer.rights": "جميع الحقوق محفوظة. صمم بكل ❤️",
+    "footer.rights": "جميع الحقوق محفوظة.",
     "logo.dev": "ويب",
     "logo.web": "كرافت",
     "pricing.nav.web": "مواقع",
     "pricing.nav.portfolio": "بورتفوليو",
+    "pricing.nav.store": "متجر",
     "pricing.nav.cv": "سيفي",
     "pricing.back": "العودة للرئيسية"
   },
@@ -111,11 +112,12 @@ const translations = {
     "contact.send": "Send Message",
     "contact.success": "Message sent successfully! We will reply within minutes ✨",
     "contact.placeholder.email": "Email or Phone",
-    "footer.rights": "All rights reserved. Crafted with ❤️",
+    "footer.rights": "All rights reserved.",
     "logo.dev": "Web",
     "logo.web": "Craft",
     "pricing.nav.web": "Websites",
     "pricing.nav.portfolio": "Portfolios",
+    "pricing.nav.store": "Store",
     "pricing.nav.cv": "CV",
     "pricing.back": "Back to Home"
   }
