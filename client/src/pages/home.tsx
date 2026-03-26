@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { 
   Laptop, 
   FileText, 
@@ -304,6 +305,46 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 md:py-32 bg-background relative overflow-hidden">
+        <div className="container px-6 mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 md:mb-20"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">{t("faq.title")}</h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {t("faq.desc")}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {[1, 2, 3, 4].map((item) => (
+                <AccordionItem 
+                  key={item} 
+                  value={`item-${item}`} 
+                  className="bg-muted/30 border border-border/50 rounded-2xl px-6 data-[state=open]:bg-primary/5 data-[state=open]:border-primary/30 transition-colors"
+                >
+                  <AccordionTrigger className="text-lg md:text-xl font-bold py-6 hover:no-underline text-start text-foreground">
+                    {t(`faq.q${item}`)}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base md:text-lg text-muted-foreground leading-relaxed pb-6">
+                    {t(`faq.a${item}`)}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
         </div>
       </section>
 
