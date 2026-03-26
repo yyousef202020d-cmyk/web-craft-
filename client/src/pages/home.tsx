@@ -329,7 +329,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <Accordion type="single" collapsible className="w-full space-y-4">
-              {[1, 2, 3, 4].map((item) => (
+              {[1, 2, 3, 4, 5].map((item) => (
                 <AccordionItem 
                   key={item} 
                   value={`item-${item}`} 
