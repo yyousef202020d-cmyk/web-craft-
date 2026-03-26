@@ -24,48 +24,6 @@ import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "l
 export default function Home() {
   const { lang, t } = useLanguage();
 
-  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    
-    try {
-      // Using FormSubmit for direct email sending without a backend
-      await fetch("https://formsubmit.co/ajax/hebaomarmm@gmail.com", {
-        method: "POST",
-        headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          Name: data.name,
-          Contact: data.contact,
-          Message: data.message,
-          _subject: "New Contact Form Submission from Web Craft"
-        })
-      });
-
-      toast.success(t("contact.success"), {
-        style: {
-          background: 'rgba(139, 92, 246, 0.1)',
-          backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(139, 92, 246, 0.2)',
-          color: '#8b5cf6',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          padding: '1.5rem',
-          borderRadius: '1.2rem',
-        },
-        duration: 5000,
-      });
-      
-      e.currentTarget.reset();
-    } catch (error) {
-      toast.error(lang === 'ar' ? 'حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى.' : 'An error occurred while sending the message. Please try again.');
-    }
-  };
-
   useEffect(() => {
     const handleHashScroll = () => {
       const hash = window.location.hash;
@@ -395,7 +353,17 @@ export default function Home() {
           >
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
-                <form className="space-y-8 md:space-y-10" onSubmit={handleContactSubmit}>
+                <form 
+                  action="https://formsubmit.co/hebaomarmm@gmail.com" 
+                  method="POST" 
+                  className="space-y-8 md:space-y-10"
+                >
+                  <input type="hidden" name="_subject" value="New Contact Form Submission from Web Craft" />
+                  {/* Remove captcha for smoother experience */}
+                  <input type="hidden" name="_captcha" value="false" />
+                  {/* Redirect back to the site after submission */}
+                  <input type="hidden" name="_next" value="https://web-craft.tech" />
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
