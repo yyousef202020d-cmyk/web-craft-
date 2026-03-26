@@ -16,7 +16,7 @@ import {
 import heroBg from "@assets/generated_images/abstract_dark_tech_background_with_neon_gradients.png";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Toaster, toast } from "sonner";
 import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "lucide-react";
@@ -359,10 +359,8 @@ export default function Home() {
                   className="space-y-8 md:space-y-10"
                 >
                   <input type="hidden" name="_subject" value="New Contact Form Submission from Web Craft" />
-                  {/* Remove captcha for smoother experience */}
                   <input type="hidden" name="_captcha" value="false" />
-                  {/* Redirect back to the site after submission */}
-                  <input type="hidden" name="_next" value="https://web-craft.tech" />
+                  <input type="hidden" name="_template" value="box" />
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                     <div className="space-y-4">
@@ -393,7 +391,7 @@ export default function Home() {
                     <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
                     <Textarea name="message" required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
                   </div>
-                  <Button type="submit" size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl">
+                  <Button type="submit" size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl disabled:opacity-70">
                     {t("contact.send")}
                   </Button>
                 </form>
