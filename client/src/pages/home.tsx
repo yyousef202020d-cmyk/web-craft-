@@ -24,34 +24,46 @@ import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "l
 export default function Home() {
   const { lang, t } = useLanguage();
 
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     const formData = new FormData(e.currentTarget);
-    const name = formData.get('name');
-    const contact = formData.get('contact');
-    const message = formData.get('message');
+    const data = Object.fromEntries(formData.entries());
     
-    const subject = `New Contact Form Submission from ${name}`;
-    const body = `Name: ${name}%0D%0AContact Info: ${contact}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-    
-    window.location.href = `mailto:hebaomarmm@gmail.com?subject=${subject}&body=${body}`;
-    
-    toast.success(t("contact.success"), {
-      style: {
-        background: 'rgba(139, 92, 246, 0.1)',
-        backdropFilter: 'blur(8px)',
-        border: '1px solid rgba(139, 92, 246, 0.2)',
-        color: '#8b5cf6',
-        fontSize: '1.1rem',
-        fontWeight: 'bold',
-        padding: '1.5rem',
-        borderRadius: '1.2rem',
-      },
-      duration: 5000,
-    });
-    
-    e.currentTarget.reset();
+    try {
+      // Using FormSubmit for direct email sending without a backend
+      await fetch("https://formsubmit.co/ajax/hebaomarmm@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: data.name,
+          Contact: data.contact,
+          Message: data.message,
+          _subject: "New Contact Form Submission from Web Craft"
+        })
+      });
+
+      toast.success(t("contact.success"), {
+        style: {
+          background: 'rgba(139, 92, 246, 0.1)',
+          backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(139, 92, 246, 0.2)',
+          color: '#8b5cf6',
+          fontSize: '1.1rem',
+          fontWeight: 'bold',
+          padding: '1.5rem',
+          borderRadius: '1.2rem',
+        },
+        duration: 5000,
+      });
+      
+      e.currentTarget.reset();
+    } catch (error) {
+      toast.error(lang === 'ar' ? 'حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى.' : 'An error occurred while sending the message. Please try again.');
+    }
   };
 
   useEffect(() => {
