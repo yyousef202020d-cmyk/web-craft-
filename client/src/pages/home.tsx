@@ -24,8 +24,18 @@ import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "l
 export default function Home() {
   const { lang, t } = useLanguage();
 
-  const handleWhatsAppRedirect = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const contact = formData.get('contact');
+    const message = formData.get('message');
+    
+    const subject = `New Contact Form Submission from ${name}`;
+    const body = `Name: ${name}%0D%0AContact Info: ${contact}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+    
+    window.location.href = `mailto:hebaomarmm@gmail.com?subject=${subject}&body=${body}`;
     
     toast.success(t("contact.success"), {
       style: {
@@ -40,6 +50,8 @@ export default function Home() {
       },
       duration: 5000,
     });
+    
+    e.currentTarget.reset();
   };
 
   useEffect(() => {
@@ -371,7 +383,7 @@ export default function Home() {
           >
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
-                <form className="space-y-8 md:space-y-10" onSubmit={handleWhatsAppRedirect}>
+                <form className="space-y-8 md:space-y-10" onSubmit={handleContactSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                     <div className="space-y-4">
                       <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
