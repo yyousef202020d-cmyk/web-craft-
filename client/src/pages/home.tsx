@@ -354,13 +354,12 @@ export default function Home() {
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
                 <form 
-                  action="https://formsubmit.co/hebaomarmm@gmail.com" 
+                  action="https://api.web3forms.com/submit" 
                   method="POST" 
                   className="space-y-8 md:space-y-10"
                 >
-                  <input type="hidden" name="_subject" value="New Contact Form Submission from Web Craft" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_template" value="box" />
+                  <input type="hidden" name="access_key" value="5152bfec-44bb-4d24-8f51-b8f484b03da0" />
+                  <input type="hidden" name="subject" value="New Contact Form Submission from Web Craft" />
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                     <div className="space-y-4">
