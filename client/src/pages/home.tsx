@@ -394,6 +394,25 @@ export default function Home() {
                   <Button type="submit" size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl disabled:opacity-70">
                     {t("contact.send")}
                   </Button>
+                  
+                  <div className="mt-8 text-center">
+                    <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
+                      {t("contact.note")}
+                    </p>
+                    <div className="flex justify-center gap-4">
+                      <a href="https://www.instagram.com/webcraft.t.t?igsh=MXIyaDgzY3Ixcm9uMw==" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all hover:scale-110 rounded-full" aria-label="Instagram">
+                        <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+                      </a>
+                      <a href="https://www.tiktok.com/@web.craft60?_r=1&_t=ZS-94IaGHOan8X" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-all hover:scale-110 rounded-full" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6">
+                          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                        </svg>
+                      </a>
+                      <a href="https://wa.me/201208552424" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-[#25D366]/20 text-muted-foreground hover:text-[#25D366] transition-all hover:scale-110 rounded-full" aria-label="WhatsApp">
+                        <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+                      </a>
+                    </div>
+                  </div>
                 </form>
               </CardContent>
             </Card>
