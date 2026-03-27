@@ -15,21 +15,21 @@ export default function Pricing() {
     web: [
       {
         name: lang === "ar" ? "المصغر" : "Starter",
-        price: lang === "ar" ? "750" : "20",
+        price: lang === "ar" ? "749" : "19",
         icon: Rocket,
         features: lang === "ar" ? ["صفحة واحدة احترافية", "تصميم متجاوب بالكامل", "ربط وسائل التواصل", "دعم فني لمدة شهر"] : ["One Professional Page", "Fully Responsive Design", "Social Media Integration", "1 Month Technical Support"],
         recommended: false
       },
       {
         name: lang === "ar" ? "الاحترافي" : "Professional",
-        price: lang === "ar" ? "1750" : "45",
+        price: lang === "ar" ? "1749" : "49",
         icon: Crown,
         features: lang === "ar" ? ["حتى 5 صفحات", "لوحة تحكم بسيطة", "تحسين محركات البحث SEO", "دعم فني لمدة 3 أشهر", "تعديلات غير محدودة"] : ["Up to 5 Pages", "Simple Dashboard", "SEO Optimization", "3 Months Technical Support", "Unlimited Revisions"],
         recommended: true
       },
       {
         name: lang === "ar" ? "المتكامل" : "Enterprise",
-        price: lang === "ar" ? "3750+" : "100+",
+        price: lang === "ar" ? "3749+" : "99+",
         icon: Star,
         features: lang === "ar" ? ["موقع متكامل / متجر", "نظام إدارة محتوى متقدم", "ربط بوابات دفع", "دعم فني لمدة سنة", "تدريب على الاستخدام"] : ["Full Website / Store", "Advanced CMS", "Payment Gateway Integration", "1 Year Technical Support", "User Training"],
         recommended: false
@@ -38,21 +38,21 @@ export default function Pricing() {
     portfolio: [
       {
         name: lang === "ar" ? "الشخصي" : "Personal",
-        price: lang === "ar" ? "600" : "15",
+        price: lang === "ar" ? "599" : "15",
         icon: Rocket,
         features: lang === "ar" ? ["صفحة تعريفية واحدة", "معرض صور للمشاريع", "روابط تواصل اجتماعي", "تصميم عصري"] : ["Single Bio Page", "Project Gallery", "Social Links", "Modern Design"],
         recommended: false
       },
       {
         name: lang === "ar" ? "المبدع" : "Creative",
-        price: lang === "ar" ? "1250" : "32",
+        price: lang === "ar" ? "1249" : "29",
         icon: Crown,
         features: lang === "ar" ? ["تصميم مخصص بالكامل", "نظام تصفية للمشاريع", "أنيميشن متقدم", "دعم فني شهرين"] : ["Fully Custom Design", "Project Filtering", "Advanced Animations", "2 Months Support"],
         recommended: true
       },
       {
         name: lang === "ar" ? "الخبير" : "Expert",
-        price: lang === "ar" ? "2250" : "57",
+        price: lang === "ar" ? "2249" : "59",
         icon: Star,
         features: lang === "ar" ? ["دومين مجاني لسنة", "كتابة محتوى احترافية", "تحسين محركات البحث", "تعديلات مدى الحياة"] : ["Free Domain 1 Year", "Pro Content Writing", "SEO Optimization", "Lifetime Edits"],
         recommended: false
@@ -61,21 +61,21 @@ export default function Pricing() {
     store: [
       {
         name: lang === "ar" ? "المتجر الأساسي" : "Basic Store",
-        price: lang === "ar" ? "2000" : "50",
+        price: lang === "ar" ? "1999" : "49",
         icon: Rocket,
         features: lang === "ar" ? ["إضافة حتى 20 منتج", "نظام سلة مشتريات", "لوحة تحكم للمنتجات", "ربط واتساب للطلبات"] : ["Up to 20 Products", "Shopping Cart System", "Product Dashboard", "WhatsApp Ordering"],
         recommended: false
       },
       {
         name: lang === "ar" ? "متجر البراند" : "Brand Store",
-        price: lang === "ar" ? "4250" : "110",
+        price: lang === "ar" ? "4249" : "109",
         icon: Crown,
         features: lang === "ar" ? ["منتجات غير محدودة", "بوابات دفع إلكترونية", "نظام تتبع الطلبات", "تقارير مبيعات شهرية", "دعم فني 6 أشهر"] : ["Unlimited Products", "Payment Gateways", "Order Tracking", "Monthly Sales Reports", "6 Months Support"],
         recommended: true
       },
       {
         name: lang === "ar" ? "متجر متكامل" : "Enterprise Store",
-        price: lang === "ar" ? "7500+" : "190+",
+        price: lang === "ar" ? "7499+" : "199+",
         icon: Star,
         features: lang === "ar" ? ["تطبيق موبايل مدمج", "ربط مع شركات الشحن", "نظام تسويق بالعمولة", "دعم فني سنة كاملة"] : ["Mobile App Integration", "Shipping Integration", "Affiliate System", "1 Year Support"],
         recommended: false
@@ -84,21 +84,21 @@ export default function Pricing() {
     cv: [
       {
         name: lang === "ar" ? "الأساسي" : "Basic",
-        price: lang === "ar" ? "250" : "7",
+        price: lang === "ar" ? "249" : "9",
         icon: Rocket,
         features: lang === "ar" ? ["سيرة ذاتية صفحة واحدة", "رابط QR مخصص", "تنزيل بصيغة PDF", "تنسيق احترافي"] : ["1-Page Interactive CV", "Custom QR Link", "PDF Download", "Professional Layout"],
         recommended: false
       },
       {
         name: lang === "ar" ? "المتميز" : "Premium",
-        price: lang === "ar" ? "500" : "12",
+        price: lang === "ar" ? "499" : "15",
         icon: Crown,
         features: lang === "ar" ? ["رابط ويب خاص", "دعم لغتين", "أنيميشن للعناصر", "تعديلات لمدة سنة"] : ["Live Web Link", "Bilingual Support", "Element Animations", "1 Year Updates"],
         recommended: true
       },
       {
         name: lang === "ar" ? "الذهبي" : "Gold",
-        price: lang === "ar" ? "900" : "22",
+        price: lang === "ar" ? "899" : "25",
         icon: Star,
         features: lang === "ar" ? ["فيديو تعريفي مدمج", "تتبع زيارات الـ CV", "تحليل كلمات مفتاحية", "دعم VIP"] : ["Integrated Intro Video", "Visit Tracking", "Keyword Analysis", "VIP Support"],
         recommended: false
