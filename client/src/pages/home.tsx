@@ -23,6 +23,32 @@ import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "l
 
 export default function Home() {
   const { lang, t } = useLanguage();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      
+      if (response.ok) {
+        toast.success(t("contact.success"));
+        e.currentTarget.reset();
+      } else {
+        toast.error(lang === 'ar' ? "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى." : "Error sending message, please try again.");
+      }
+    } catch (error) {
+      toast.error(lang === 'ar' ? "حدث خطأ في الاتصال، تحقق من الإنترنت وحاول مجدداً." : "Connection error, check your internet and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     const handleHashScroll = () => {
@@ -354,8 +380,7 @@ export default function Home() {
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
                 <form 
-                  action="https://api.web3forms.com/submit" 
-                  method="POST" 
+                  onSubmit={handleSubmit}
                   className="space-y-8 md:space-y-10"
                 >
                   <input type="hidden" name="access_key" value="5152bfec-44bb-4d24-8f51-b8f484b03da0" />
@@ -390,8 +415,8 @@ export default function Home() {
                     <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
                     <Textarea name="message" required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
                   </div>
-                  <Button type="submit" size="lg" className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl disabled:opacity-70">
-                    {t("contact.send")}
+                  <Button type="submit" size="lg" disabled={isSubmitting} className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl disabled:opacity-70">
+                    {isSubmitting ? (lang === 'ar' ? "جاري الإرسال..." : "Sending...") : t("contact.send")}
                   </Button>
                   
                   <div className="mt-8 text-center">
