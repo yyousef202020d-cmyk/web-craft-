@@ -17,7 +17,9 @@ export default function Pricing() {
         name: lang === "ar" ? "الاحترافي" : "Professional",
         price: lang === "ar" ? "749" : "20",
         icon: Crown,
-        features: lang === "ar" ? ["حتى 5 صفحات", "لوحة تحكم بسيطة", "تحسين محركات البحث SEO", "دعم فني لمدة 3 أشهر", "تعديلات غير محدودة"] : ["Up to 5 Pages", "Simple Dashboard", "SEO Optimization", "3 Months Technical Support", "Unlimited Revisions"],
+        features: lang === "ar" 
+          ? ["تصميم عصري متجاوب", "ربط مباشر بالواتساب", "سرعة تحميل فائقة", "تجهيز محركات البحث SEO", "حماية وتأمين الموقع"] 
+          : ["Modern Responsive Design", "Direct WhatsApp Integration", "Ultra-fast Loading Speed", "Basic SEO Preparation", "Site Security & Protection"],
         recommended: true
       }
     ],
@@ -26,7 +28,9 @@ export default function Pricing() {
         name: lang === "ar" ? "المبدع" : "Creative",
         price: lang === "ar" ? "999" : "25",
         icon: Crown,
-        features: lang === "ar" ? ["تصميم مخصص بالكامل", "نظام تصفية للمشاريع", "أنيميشن متقدم", "دعم فني شهرين"] : ["Fully Custom Design", "Project Filtering", "Advanced Animations", "2 Months Support"],
+        features: lang === "ar" 
+          ? ["معرض أعمال تفاعلي", "قسم للشهادات والتقييمات", "أنيميشن احترافي للعناصر", "صفحة 'من أنا' إبداعية", "ربط كلي بمنصات التواصل"] 
+          : ["Interactive Project Gallery", "Testimonials Section", "Professional Animations", "Creative 'About' Page", "Full Social Integration"],
         recommended: true
       }
     ],
@@ -35,7 +39,9 @@ export default function Pricing() {
         name: lang === "ar" ? "متجر البراند" : "Brand Store",
         price: lang === "ar" ? "1499" : "39",
         icon: Crown,
-        features: lang === "ar" ? ["منتجات غير محدودة", "بوابات دفع إلكترونية", "نظام تتبع الطلبات", "تقارير مبيعات شهرية", "دعم فني 6 أشهر"] : ["Unlimited Products", "Payment Gateways", "Order Tracking", "Monthly Sales Reports", "6 Months Support"],
+        features: lang === "ar" 
+          ? ["متجر سريع وسهل الاستخدام", "نظام سلة مشتريات ذكي", "لوحة تحكم لإدارة المنتجات", "تتبع الطلبات عبر الواتساب", "عرض مميز للمنتجات والخصومات"] 
+          : ["Fast User-friendly Store", "Smart Shopping Cart", "Product Admin Dashboard", "WhatsApp Order Tracking", "Featured Products Display"],
         recommended: true
       }
     ],
@@ -44,7 +50,9 @@ export default function Pricing() {
         name: lang === "ar" ? "المتميز" : "Premium",
         price: lang === "ar" ? "299" : "10",
         icon: Crown,
-        features: lang === "ar" ? ["رابط ويب خاص", "دعم لغتين", "أنيميشن للعناصر", "تعديلات لمدة سنة"] : ["Live Web Link", "Bilingual Support", "Element Animations", "1 Year Updates"],
+        features: lang === "ar" 
+          ? ["رابط ويب دائم باسمك", "تصميم احترافي بصفحة واحدة", "تحميل السيرة الذاتية PDF", "كود QR للمشاركة السريعة", "دعم اللغتين العربية والإنجليزية"] 
+          : ["Permanent Web Link", "Professional 1-Page Layout", "Download as PDF", "QR Code for Sharing", "Bilingual Support (AR/EN)"],
         recommended: true
       }
     ]
