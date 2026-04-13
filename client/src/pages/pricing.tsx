@@ -37,7 +37,7 @@ export default function Pricing() {
     store: [
       {
         name: lang === "ar" ? "متجر البراند" : "Brand Store",
-        price: lang === "ar" ? "1499" : "39",
+        price: lang === "ar" ? "999" : "39",
         icon: Crown,
         features: lang === "ar" 
           ? ["متجر سريع وسهل الاستخدام", "نظام سلة مشتريات ذكي", "لوحة تحكم لإدارة المنتجات", "تتبع الطلبات عبر الواتساب", "عرض مميز للمنتجات والخصومات"] 
@@ -48,7 +48,7 @@ export default function Pricing() {
     cv: [
       {
         name: lang === "ar" ? "المتميز" : "Premium",
-        price: lang === "ar" ? "299" : "10",
+        price: lang === "ar" ? "249" : "10",
         icon: Crown,
         features: lang === "ar" 
           ? ["رابط ويب دائم باسمك", "تصميم احترافي بصفحة واحدة", "تحميل السيرة الذاتية PDF", "كود QR للمشاركة السريعة", "دعم اللغتين العربية والإنجليزية"] 
