@@ -14,7 +14,7 @@ import {
   Code2
 } from "lucide-react";
 import heroBg from "@assets/generated_images/abstract_dark_tech_background_with_neon_gradients.png";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState, useEffect } from "react";
 
@@ -24,22 +24,33 @@ import { MessageCircle, Globe2, Rocket, ShieldCheck, Target, Instagram } from "l
 export default function Home() {
   const { lang, t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
     
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json
       });
       
-      if (response.ok) {
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        setIsSubmitted(true);
         toast.success(t("contact.success"));
-        e.currentTarget.reset();
+        form.reset();
       } else {
         toast.error(lang === 'ar' ? "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى." : "Error sending message, please try again.");
       }
@@ -379,65 +390,103 @@ export default function Home() {
           >
             <Card className="border-border/50 bg-card/60 backdrop-blur-md shadow-2xl overflow-hidden rounded-[1.5rem] md:rounded-[2rem]">
               <CardContent className="p-6 sm:p-10 md:p-16">
-                <form 
-                  onSubmit={handleSubmit}
-                  className="space-y-8 md:space-y-10"
-                >
-                  <input type="hidden" name="access_key" value="5152bfec-44bb-4d24-8f51-b8f484b03da0" />
-                  <input type="hidden" name="subject" value="New Contact Form Submission from Web Craft" />
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
-                      <Input name="name" required placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
-                    </div>
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.email")}</label>
-                      <Input 
-                        name="contact"
-                        required 
-                        placeholder={t("contact.placeholder.email")}
-                        className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" 
-                        onBlur={(e) => {
-                          const val = e.target.value;
-                          const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
-                          const isPhone = /^[0-9+]{8,15}$/.test(val.replace(/\s/g, ''));
-                          if (val && !isEmail && !isPhone) {
-                            e.target.setCustomValidity(lang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح أو رقم هاتف' : 'Please enter a valid email or phone number');
-                          } else {
-                            e.target.setCustomValidity('');
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
-                    <Textarea name="message" required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
-                  </div>
-                  <Button type="submit" size="lg" disabled={isSubmitting} className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl disabled:opacity-70">
-                    {isSubmitting ? (lang === 'ar' ? "جاري الإرسال..." : "Sending...") : t("contact.send")}
-                  </Button>
-                  
-                  <div className="mt-8 text-center">
-                    <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
-                      {t("contact.note")}
-                    </p>
-                    <div className="flex justify-center gap-4">
-                      <a href="https://www.instagram.com/webcraft.t.t?igsh=MXIyaDgzY3Ixcm9uMw==" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all hover:scale-110 rounded-full" aria-label="Instagram">
-                        <Instagram className="w-5 h-5 md:w-6 md:h-6" />
-                      </a>
-                      <a href="https://www.tiktok.com/@web.craft60?_r=1&_t=ZS-94IaGHOan8X" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-all hover:scale-110 rounded-full" aria-label="TikTok">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6">
-                          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-                        </svg>
-                      </a>
-                      <a href="https://wa.me/201208552424" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-[#25D366]/20 text-muted-foreground hover:text-[#25D366] transition-all hover:scale-110 rounded-full" aria-label="WhatsApp">
-                        <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
-                      </a>
-                    </div>
-                  </div>
-                </form>
+                <AnimatePresence mode="wait">
+                  {!isSubmitted ? (
+                    <motion.form 
+                      key="contact-form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      onSubmit={handleSubmit}
+                      className="space-y-8 md:space-y-10"
+                    >
+                      <input type="hidden" name="access_key" value="5152bfec-44bb-4d24-8f51-b8f484b03da0" />
+                      <input type="hidden" name="subject" value="New Contact Form Submission from Web Craft" />
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                        <div className="space-y-4">
+                          <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.name")}</label>
+                          <Input name="name" required placeholder={lang === 'ar' ? 'أدخل اسمك' : 'Enter your name'} className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" />
+                        </div>
+                        <div className="space-y-4">
+                          <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.email")}</label>
+                          <Input 
+                            name="contact"
+                            required 
+                            placeholder={t("contact.placeholder.email")}
+                            className="bg-background/50 border-border h-14 md:h-16 text-lg md:text-xl px-6 md:px-8 rounded-xl md:rounded-2xl focus:ring-primary shadow-sm" 
+                            onBlur={(e) => {
+                              const val = e.target.value;
+                              const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val);
+                              const isPhone = /^[0-9+]{8,15}$/.test(val.replace(/\s/g, ''));
+                              if (val && !isEmail && !isPhone) {
+                                e.target.setCustomValidity(lang === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح أو رقم هاتف' : 'Please enter a valid email or phone number');
+                              } else {
+                                e.target.setCustomValidity('');
+                              }
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <label className="text-sm font-bold uppercase tracking-wider opacity-60 px-2 block">{t("contact.message")}</label>
+                        <Textarea name="message" required placeholder={lang === 'ar' ? 'تفاصيل مشروعك...' : 'Project details...'} className="bg-background/50 border-border min-h-[180px] md:min-h-[220px] text-lg md:text-xl p-6 md:p-8 rounded-xl md:rounded-2xl resize-none focus:ring-primary shadow-sm" />
+                      </div>
+                      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full h-16 md:h-20 text-xl md:text-2xl font-bold rounded-xl md:rounded-2xl glow transition-all hover:scale-[1.01] active:scale-[0.98] shadow-xl disabled:opacity-70">
+                        {isSubmitting ? (lang === 'ar' ? "جاري الإرسال..." : "Sending...") : t("contact.send")}
+                      </Button>
+                      
+                      <div className="mt-8 text-center">
+                        <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
+                          {t("contact.note")}
+                        </p>
+                        <div className="flex justify-center gap-4">
+                          <a href="https://www.instagram.com/webcraft.t.t?igsh=MXIyaDgzY3Ixcm9uMw==" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all hover:scale-110 rounded-full" aria-label="Instagram">
+                            <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+                          </a>
+                          <a href="https://www.tiktok.com/@web.craft60?_r=1&_t=ZS-94IaGHOan8X" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-all hover:scale-110 rounded-full" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6">
+                              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                            </svg>
+                          </a>
+                          <a href="https://wa.me/201208552424" target="_blank" rel="noopener noreferrer" className="p-3 bg-muted/30 hover:bg-[#25D366]/20 text-muted-foreground hover:text-[#25D366] transition-all hover:scale-110 rounded-full" aria-label="WhatsApp">
+                            <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+                          </a>
+                        </div>
+                      </div>
+                    </motion.form>
+                  ) : (
+                    <motion.div 
+                      key="success-message"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-center py-10 md:py-20 flex flex-col items-center gap-6 md:gap-8"
+                    >
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", damping: 10, stiffness: 100, delay: 0.2 }}
+                        className="w-24 h-24 md:w-32 md:h-32 bg-green-500/20 rounded-full flex items-center justify-center border-4 border-green-500/30"
+                      >
+                        <CheckCircle2 className="w-12 h-12 md:w-20 md:h-20 text-green-500" />
+                      </motion.div>
+                      <div className="space-y-3 md:space-y-4">
+                        <h3 className="text-2xl md:text-4xl font-bold">{lang === 'ar' ? 'تم الإرسال بنجاح' : 'Sent Successfully'}</h3>
+                        <p className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed">
+                          {t("contact.success")}
+                        </p>
+                      </div>
+                      <Button 
+                        variant="outline" 
+                        size="lg" 
+                        onClick={() => setIsSubmitted(false)}
+                        className="mt-4 rounded-xl h-14 px-8 border-primary/30 hover:bg-primary/10 transition-colors"
+                      >
+                        {lang === 'ar' ? 'إرسال رسالة أخرى' : 'Send another message'}
+                      </Button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </CardContent>
             </Card>
           </motion.div>
