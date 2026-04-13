@@ -76,7 +76,13 @@ const translations = {
     "pricing.nav.portfolio": "بورتفوليو",
     "pricing.nav.store": "متجر",
     "pricing.nav.cv": "سيفي",
-    "pricing.back": "العودة للرئيسية"
+    "pricing.back": "العودة للرئيسية",
+    "pricing.title": "خطة العمل",
+    "pricing.subtitle": "نقدم لك الخطة الأمثل لبناء تواجدك الرقمي بأعلى جودة",
+    "pricing.professional": "الاحترافي",
+    "pricing.fixed": "سعر ثابت",
+    "pricing.best": "الخيار الأفضل",
+    "pricing.cta": "ابدأ مشروعك الآن"
   },
   en: {
     "nav.home": "Home",
@@ -145,7 +151,13 @@ const translations = {
     "pricing.nav.portfolio": "Portfolios",
     "pricing.nav.store": "Store",
     "pricing.nav.cv": "CV",
-    "pricing.back": "Back to Home"
+    "pricing.back": "Back to Home",
+    "pricing.title": "Work Plan",
+    "pricing.subtitle": "We provide the optimal plan to build your digital presence with the highest quality",
+    "pricing.professional": "Professional",
+    "pricing.fixed": "Fixed Price",
+    "pricing.best": "Best Choice",
+    "pricing.cta": "Start Your Project Now"
   }
 };
 
