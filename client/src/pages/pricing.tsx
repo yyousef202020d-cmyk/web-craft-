@@ -26,7 +26,7 @@ export default function Pricing() {
     portfolio: [
       {
         name: lang === "ar" ? "المبدع" : "Creative",
-        price: lang === "ar" ? "999" : "25",
+        price: lang === "ar" ? "499" : "25",
         icon: Crown,
         features: lang === "ar" 
           ? ["معرض أعمال تفاعلي", "قسم للشهادات والتقييمات", "أنيميشن احترافي للعناصر", "صفحة 'من أنا' إبداعية", "ربط كلي بمنصات التواصل"] 
