@@ -51,11 +51,9 @@ export default function Home() {
         setIsSubmitted(true);
         toast.success(t("contact.success"));
         form.reset();
-      } else {
-        toast.error(lang === 'ar' ? "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى." : "Error sending message, please try again.");
       }
     } catch (error) {
-      toast.error(lang === 'ar' ? "حدث خطأ في الاتصال، تحقق من الإنترنت وحاول مجدداً." : "Connection error, check your internet and try again.");
+      console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
