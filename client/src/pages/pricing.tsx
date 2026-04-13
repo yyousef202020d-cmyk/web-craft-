@@ -15,7 +15,7 @@ export default function Pricing() {
     web: [
       {
         name: lang === "ar" ? "الاحترافي" : "Professional",
-        price: lang === "ar" ? "1749" : "49",
+        price: lang === "ar" ? "749" : "20",
         icon: Crown,
         features: lang === "ar" ? ["حتى 5 صفحات", "لوحة تحكم بسيطة", "تحسين محركات البحث SEO", "دعم فني لمدة 3 أشهر", "تعديلات غير محدودة"] : ["Up to 5 Pages", "Simple Dashboard", "SEO Optimization", "3 Months Technical Support", "Unlimited Revisions"],
         recommended: true
@@ -24,7 +24,7 @@ export default function Pricing() {
     portfolio: [
       {
         name: lang === "ar" ? "المبدع" : "Creative",
-        price: lang === "ar" ? "1249" : "29",
+        price: lang === "ar" ? "999" : "25",
         icon: Crown,
         features: lang === "ar" ? ["تصميم مخصص بالكامل", "نظام تصفية للمشاريع", "أنيميشن متقدم", "دعم فني شهرين"] : ["Fully Custom Design", "Project Filtering", "Advanced Animations", "2 Months Support"],
         recommended: true
@@ -33,7 +33,7 @@ export default function Pricing() {
     store: [
       {
         name: lang === "ar" ? "متجر البراند" : "Brand Store",
-        price: lang === "ar" ? "4249" : "109",
+        price: lang === "ar" ? "1499" : "39",
         icon: Crown,
         features: lang === "ar" ? ["منتجات غير محدودة", "بوابات دفع إلكترونية", "نظام تتبع الطلبات", "تقارير مبيعات شهرية", "دعم فني 6 أشهر"] : ["Unlimited Products", "Payment Gateways", "Order Tracking", "Monthly Sales Reports", "6 Months Support"],
         recommended: true
@@ -42,7 +42,7 @@ export default function Pricing() {
     cv: [
       {
         name: lang === "ar" ? "المتميز" : "Premium",
-        price: lang === "ar" ? "499" : "15",
+        price: lang === "ar" ? "299" : "10",
         icon: Crown,
         features: lang === "ar" ? ["رابط ويب خاص", "دعم لغتين", "أنيميشن للعناصر", "تعديلات لمدة سنة"] : ["Live Web Link", "Bilingual Support", "Element Animations", "1 Year Updates"],
         recommended: true
