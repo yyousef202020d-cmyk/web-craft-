@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Sparkles, Rocket, Crown, Star, Laptop, Briefcase, FileText, Home } from "lucide-react";
+import { Check, Sparkles, Rocket, Crown, Star, Laptop, Briefcase, FileText, Home, BookOpen, GraduationCap } from "lucide-react";
 import { Navbar } from "@/components/ui/navbar";
 import { Link } from "wouter";
 
 export default function Pricing() {
   const { t, lang } = useLanguage();
-  const [activeTab, setActiveTab] = useState<"web" | "portfolio" | "store" | "cv">("web");
+  const [activeTab, setActiveTab] = useState<"web" | "portfolio" | "store" | "cv" | "lms">("web");
 
   const pricingData = {
     web: [
@@ -55,6 +55,31 @@ export default function Pricing() {
           : ["Permanent Web Link", "Professional 1-Page Layout", "Download as PDF", "QR Code for Sharing", "Bilingual Support (AR/EN)"],
         recommended: true
       }
+    ],
+    lms: [
+      {
+        name: lang === "ar" ? "منصة تعليمية متكاملة" : "Integrated LMS Platform",
+        price: lang === "ar" ? "4999" : "199",
+        icon: Crown,
+        features: lang === "ar" 
+          ? [
+              "نظام إدارة مستخدمين ولوحة تحكم كاملة",
+              "دعم الفيديوهات والملفات التعليمية والمحاضرات",
+              "نظام اختبارات وتقييم إلكتروني تفاعلي",
+              "تقارير أداء ومتابعة أولياء الأمور والطلاب",
+              "حماية المحتوى والتحميل الآمن للفيديوهات",
+              "ربط مباشر ببوابات الدفع الإلكتروني والواتساب"
+            ] 
+          : [
+              "User Management & Full Admin Dashboard",
+              "Video, Document Course & Lecture Support",
+              "Interactive Online Quiz & Grading System",
+              "Performance & Parents/Students Reports",
+              "Content Protection & Secure Video Stream",
+              "Direct Payment Gateway & WhatsApp Integration"
+            ],
+        recommended: true
+      }
     ]
   };
 
@@ -93,6 +118,7 @@ export default function Pricing() {
               { id: "portfolio", icon: Briefcase, label: t("pricing.nav.portfolio") },
               { id: "store", icon: Rocket, label: t("pricing.nav.store") },
               { id: "cv", icon: FileText, label: t("pricing.nav.cv") },
+              { id: "lms", icon: GraduationCap, label: t("pricing.nav.lms") },
             ].map((tab) => (
               <button
                 key={tab.id}
